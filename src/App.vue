@@ -1,10 +1,35 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <NavBar></NavBar>
+  
+  
   <router-view/>
 </template>
+
+<script>
+import NavBar from '../src/components/NavBar.vue'
+export default {
+  name: 'App',
+  components: {
+    NavBar
+  },
+  created(){
+    if(sessionStorage.getItem("store")){
+      this.$store.replaceState(
+        Object.assign({},this.$store.state,JSON.parse(sessionStorage.getItem("store")))
+      )
+      sessionStorage.removeItem("store");
+    }
+    window.addEventListener("beforeunload",()=>{
+      sessionStorage.setItem("store",JSON.stringify(this.$store.state))
+    })
+  },
+
+  mounted(){
+    this.$router.replace('/login')
+  }
+}
+
+</script>
 
 <style>
 #app {
