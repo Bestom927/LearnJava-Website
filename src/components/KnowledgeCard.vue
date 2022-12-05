@@ -1,0 +1,127 @@
+<template>
+    <div class="knowledge-card">
+        <div class="knowledge-card__header">
+            <div class="knowledge-card__header__title">
+                <span class="knowledge-card__header__title__text">{{ knowledge.title }}</span>
+            </div>
+            <div class="knowledge-card__header__info">
+                <span class="knowledge-card__header__info__text">{{ knowledge.info }}</span>
+            </div>
+        </div>
+        <div class="knowledge-card__body">
+            <div class="knowledge-card__body__content">
+                <span class="knowledge-card__body__content__text">{{ knowledge.content }}</span>
+            </div>
+        </div>
+        <div class="knowledge-card__footer">
+            <div class="knowledge-card__footer__btn">
+                <el-button type="primary" @click="handleClick">完成学习</el-button>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+import { ElMessage } from "element-plus";
+import axios from "axios";
+export default {
+    name: "KnowledgeCard",
+    props: {
+        knowledge: {
+            type: Object,
+            required: true,
+            id:1,
+            title:"test",
+            info:"just test",
+            content:"just test",
+        },
+    },
+    methods: {
+        handleClick() {
+            if (!this.$store.state.is_login) {
+                ElMessage({
+                    message: "请先登录",
+                    type: "warning",
+                    showClose: true,
+                    duration: 2000,
+                });
+                /**之后此处需记录当前页面路径，以便于登陆完成后跳转 */
+                this.$router.push({
+                    path: "/login",
+                    query: { redirect: this.$route.fullPath },
+                });
+            } else {
+                // this.$router.push({
+                //     path: "/knowledgedetail",
+                //     query: { knowledge_id: this.knowledge.id },
+                // });
+                console.log("finish"+this.knowledge.id);
+                ElMessage({
+                  message: "已学习"+this.knowledge.title,
+                  type: "success",
+                  showClose: true,
+                  duration: 2000,
+                });
+            }
+        },
+    },
+};
+</script>
+<style scoped>
+.knowledge-card {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+.knowledge-card__header {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.knowledge-card__header__title {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.knowledge-card__header__title__text {
+    font-size: 20px;
+    font-weight: 600;
+}
+.knowledge-card__header__info {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.knowledge-card__header__info__text {
+    font-size: 14px;
+    color: #999;
+}
+.knowledge-card__body {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.knowledge-card__body__content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+</style>

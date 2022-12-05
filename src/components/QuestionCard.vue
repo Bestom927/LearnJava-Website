@@ -14,8 +14,14 @@
             </div>
         </div>
         <div class="question-card__footer">
-            <div class="question-card__footer__btn">
-                <el-button type="primary" @click="handleClick">查看详情</el-button>
+            <textarea  v-if="this.isAnswer" v-model="answer"></textarea>
+            <div class="question-card__footer__btn" v-if="!this.isAnswer" >
+                <el-button type="primary" @click="handleClick">开始作答</el-button>
+            </div>
+            <div class="question-card__footer__btn" v-if="this.isAnswer" >
+                <el-button type="primary" @click="submitAnswer">提交</el-button>
+                
+                <el-button type="primary" @click="cancelAnswer">取消</el-button>
             </div>
         </div>
     </div>
@@ -25,6 +31,13 @@ import { ElMessage } from "element-plus";
 import axios from "axios";
 export default {
     name: "questionCard",
+    data(){
+        return{
+            isAnswer:false,
+            answer:"",
+        }
+
+    },
     props: {
         question: {
             type: Object,
@@ -50,12 +63,39 @@ export default {
                     query: { redirect: this.$route.fullPath },
                 });
             } else {
-                this.$router.push({
-                    path: "/questiondetail",
-                    query: { question_id: this.question.id },
-                });
+                // this.$router.push({
+                //     path: "/questiondetail",
+                //     query: { question_id: this.question.id },
+                // });
+                console.log(this.question.title);
+                this.isAnswer=true;
             }
         },
+        submitAnswer(){
+            axios
+                .post("/answer", {
+                    question_id: this.question.id,
+                    answer: this.answer,
+                })
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+            ElMessage({
+                    message: "已提交题目"+this.question.title,
+                    type: "success",
+                    showClose: true,
+                    duration: 2000,
+                });
+            console.log("submit "+this.answer);
+            this.isAnswer=false;
+        },
+        cancelAnswer(){
+            console.log("cancel");
+            this.isAnswer=false;
+        }
     },
 };
 </script>
