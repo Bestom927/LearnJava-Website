@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Lesson from '../views/LessonCenter.vue'
-import Anwser from '../views/Anwser.vue'
+import Answer from '../views/Answer.vue'
 import { ElMessage } from 'element-plus'
 
 const routes = [
@@ -36,24 +36,24 @@ const routes = [
     component:Lesson
   },
   {
-    path: '/anwser',
-    name: 'anwser',
-    component:Anwser
+    path: '/answer',
+    name: 'answer',
+    component:Answer
   },
   {
-    path:'/lessondetail/:lesson_id',
-    name:'lessondetail',
+    path:'/lessonDetail/:lesson_id',
+    name:'lessonDetail',
     component:()=>import('../views/LessonDetail.vue')
   },
   {
-    path:'/lessondetail/:lesson_id/:chapter_id',
-    name:'lessonchapter',
-    component:()=>import('../views/LessonChapter.vue')
+    path:'/lessonDetail/:lesson_id/:chapter_id/knowledge',
+    name:'lessonChapterKnowledge',
+    component:()=>import('../views/LessonChapterKnowledge.vue')
   },
   {
-    path:'/lessonAnswer/:lesson_id/:chapter_id',
-    name:'lessonAnswer',
-    component:()=>import('../views/LessonAnswer.vue')
+    path:'/lessonDetail/:lesson_id/:chapter_id/question',
+    name:'lessonChapterQuestion',
+    component:()=>import('../views/LessonChapterQuestion.vue')
   },
 
 ]

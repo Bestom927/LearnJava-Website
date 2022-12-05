@@ -65,12 +65,12 @@ export default {
 .lesson-card{
     position: relative;
     width: 98%;
-    height: 20vh;
+    height:25vh;
     /* 设置阴影 */
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     /* 设置card的背景色 */
-    background: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(#ffffffd0, #bdecfdd5);
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -96,17 +96,17 @@ export default {
     top: 20%;
     left: 0;
     width: 100%;
-    height: 20%;
+    height: 15%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .lesson-card__body__content{
     position: absolute;
-    top: 40%;
+    top: 35%;
     left: 0;
     width: 100%;
-    height: 40%;
+    height: 45%;
     display: flex;
     justify-content: center;
     align-items: center;

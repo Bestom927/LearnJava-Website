@@ -109,7 +109,7 @@ export default {
   
   width: 100%;
   height: 100%;
-  background: linear-gradient(#ffffffd0, #bdecfdd5);
+  
   box-shadow: -5px -5px 10px #eff0f0, 5px 5px 10px #ffffff;
   border-radius: 17px;
 }
