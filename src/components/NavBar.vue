@@ -13,19 +13,12 @@
       /></el-menu-item>
       <div class="flex-grow" />
       <el-menu-item index="home" @click="goHome">首页</el-menu-item>
-      <el-menu-item index="school_center" @click="goSchoolCenter"
-        >找对学校</el-menu-item
+      <el-menu-item index="lesson_center" @click="goLessonCenter"
+        >我的课程</el-menu-item
       >
-      <el-menu-item index="institution_center" @click="goInstitutionCenter"
-        >看看机构</el-menu-item
+      <el-menu-item index="anwser_center" @click="goAnwserCenter"
+        >我的答题</el-menu-item
       >
-      <el-sub-menu index="3">
-        <template #title>说说留学</template>
-        <el-menu-item index="qa_center" @click="goQACenter">留学问答</el-menu-item>
-        <el-menu-item index="blog" @click="goBlog">动态分享</el-menu-item>
-      </el-sub-menu>
-      <el-menu-item index="newsHome" @click="goNewsHome">留学快讯</el-menu-item>
-  
       <el-sub-menu index="6" v-if="is_login == false">
         <template #title>登录/注册</template>
         <el-menu-item index="login" @click="goLogin">登录</el-menu-item>
@@ -37,15 +30,6 @@
           <span style="margin-left:10px">{{ this.$store.state.user_info.user_name }}</span>
         </template>
   
-        <el-menu-item index="person_space" @click="goPersonSpace"
-          >个人空间</el-menu-item
-        >
-        <el-menu-item index="blog_edit" @click="goBlogEdit"
-          >动态发布</el-menu-item
-        >
-        <el-menu-item index="question_edit" @click="goQuestionEdit"
-          >我要提问</el-menu-item
-        >
         <el-menu-item index="person_info" @click="goPersonInformation"
           >账户设置</el-menu-item
         >
@@ -68,6 +52,12 @@
       goHome() {
         router.push({ name: "home" });
       },
+      goLessonCenter(){
+        router.push({ name: "lesson" });
+      },
+      goAnwserCenter(){
+        router.push({ name: "anwser" });
+    },
       goNewsHome() {
         router.push({
           name: "newsHome",

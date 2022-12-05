@@ -2,6 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import Lesson from '../views/LessonCenter.vue'
+import Anwser from '../views/Anwser.vue'
 import { ElMessage } from 'element-plus'
 
 const routes = [
@@ -27,7 +29,33 @@ const routes = [
     path: '/register',
     name: 'register',
     component:Register
-  }
+  },
+  {
+    path: '/lesson',
+    name: 'lesson',
+    component:Lesson
+  },
+  {
+    path: '/anwser',
+    name: 'anwser',
+    component:Anwser
+  },
+  {
+    path:'/lessondetail/:lesson_id',
+    name:'lessondetail',
+    component:()=>import('../views/LessonDetail.vue')
+  },
+  {
+    path:'/lessondetail/:lesson_id/:chapter_id',
+    name:'lessonchapter',
+    component:()=>import('../views/LessonChapter.vue')
+  },
+  {
+    path:'/lessonAnswer/:lesson_id/:chapter_id',
+    name:'lessonAnswer',
+    component:()=>import('../views/LessonAnswer.vue')
+  },
+
 ]
 
 const router = createRouter({
