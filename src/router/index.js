@@ -66,7 +66,21 @@ const routes = [
     name:'lessonChapterQuestion',
     component:()=>import('../views/LessonChapterQuestion.vue')
   },
-
+  {
+    path:'/teacher',
+    name:'teacher',
+    component:()=>import('../views/TeacherPage.vue')
+  },
+  {
+    path:'/teacher/reviewed',
+    name:'teacherReviewed',
+    component:()=>import('../views/TeacherReviewed.vue')
+  },
+  {
+    path:'/teacher/unreviewed',
+    name:'teacherUnreviewed',
+    component:()=>import('../views/TeacherUnreviewed.vue')
+  },
 ]
 
 const router = createRouter({

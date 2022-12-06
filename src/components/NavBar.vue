@@ -19,6 +19,11 @@
       <el-menu-item index="answer_center" @click="goAnwserCenter"
         >我的答题</el-menu-item
       >
+
+      <el-menu-item v-if="this.$store.state.is_teacher" index="teacher_center" @click="goTeacherPage"
+        >批改</el-menu-item
+      >
+
       <el-sub-menu index="6" v-if="is_login == false">
         <template #title>登录/注册</template>
         <el-menu-item index="login" @click="goLogin">登录</el-menu-item>
@@ -89,6 +94,24 @@
         }
         
     },
+      goTeacherPage(){
+        if (!this.$store.state.is_login) {
+          ElMessage({
+            message: "请先登录",
+            type: "warning",
+            showClose: true,
+            duration: 2000,
+          });
+          /**之后此处需记录当前页面路径，以便于登陆完成后跳转 */
+          this.$router.push({
+            path: "/login",
+            query: { redirect: '/teacher' },
+          });
+        }
+        else{
+          router.push({ name: "teacher" });
+        }
+      },
       goLogin() {
         router.push({
           name: "login",

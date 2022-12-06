@@ -1,8 +1,9 @@
 <template>
-    <div>lesson detail</div>
+    <h1>©нЁлуб╫з</h1>
+    <!-- <div>lesson detail</div>
     <div>{{msg}}</div>
     <div>the lesson id is {{$route.params.lesson_id}}</div>
-    <div>the lesson id is {{this.lesson_id}}</div>
+    <div>the lesson id is {{this.lesson_id}}</div> -->
     <div v-for="(chapter, index) in chapter_list" :key="index">
         <ChapterCard :chapter="chapter"></ChapterCard>
         <br />
@@ -36,11 +37,15 @@ export default {
   created(){
     this.lesson_id = this.$route.params.lesson_id; 
     axios({
-      url: "lesson/chapter_list" + "?lesson_id=" + this.lesson_id,
-      method: "get",
+        url: "/api/chapter/fromLesson" ,
+        params: {
+            lesson_id: this.lesson_id,
+        },
+        method: "get",
     })
       .then((res) => {
-        this.chapter_list = res.data.data.chapter_list;
+        this.chapter_list = res.data.data.chapter;
+        console.log(this.chapter_list);
       })
       .catch((err) => {
         console.log(err);

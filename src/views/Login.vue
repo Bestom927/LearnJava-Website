@@ -46,10 +46,11 @@
               </el-row>
             </div>
             <div class="buttonCard">
-              <input type="radio" v-model="picked" value="teacher" id="老师"/>
-              <label for="teacher">老师</label>
               <input type="radio" v-model="picked" value="student" id="学生"/>
               <label for="teacher">学生</label>
+              <input type="radio" v-model="picked" value="teacher" id="老师"/>
+              <label for="teacher">老师</label>
+              
               <el-button type="primary" @click="login">登录</el-button>
             </div>
           </div>
@@ -69,7 +70,7 @@ export default {
     return {
       user_phone: "",
       user_password: "",
-      picked:"teacher",
+      picked:"student",
     };
   },
   methods: {

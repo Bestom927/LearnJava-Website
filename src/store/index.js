@@ -61,6 +61,8 @@ export default createStore({
     //登出
     loginOut(state){
       state.is_login=false;
+      state.is_student=false;
+      state.is_teacher=false;
       state.user_info={
         user_id: -1,
         user_email: "",

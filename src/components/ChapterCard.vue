@@ -2,7 +2,7 @@
     <div class="chapter-card">
         <div class="chapter-card__header">
         <div class="chapter-card__header__title">
-            <span class="chapter-card__header__title__text">{{ chapter.title }}</span>
+            <span class="chapter-card__header__title__text">{{ chapter.chapterTitle }}</span>
         </div>
         <div class="chapter-card__header__info">
             <span class="chapter-card__header__info__text">{{ chapter.info }}</span>
@@ -10,7 +10,7 @@
         </div>
         <div class="chapter-card__body">
         <div class="chapter-card__body__content">
-            <span class="chapter-card__body__content__text">{{ chapter.content }}</span>
+            <span class="chapter-card__body__content__text">{{ chapter.chapterContent }}</span>
         </div>
         </div>
         <div class="chapter-card__footer">
@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import { ElMessage } from "element-plus";
+import axios from "axios";
 export default {
     name: 'ChapterCard',
     props: {
@@ -79,6 +81,8 @@ export default {
                 });
             }
         },
+    },
+    created() {
     },
 };
 
