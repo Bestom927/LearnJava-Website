@@ -65,7 +65,11 @@ export default {
  created(){
      this.chapter_id = this.$route.params.chapter_id; 
      axios({
-       url: "lesson/knowledge_list" + "?chapter_id=" + this.chapter_id,
+       url: "lesson/knowledge_list" ,
+         params: {
+            lesson_id: this.$route.params.lesson_id,
+            chapter_id: this.chapter_id,
+         },
        method: "get",
      })
        .then((res) => {

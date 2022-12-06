@@ -31,7 +31,7 @@
       </el-sub-menu>
       <el-sub-menu index="7" v-else>
         <template #title>
-          <el-avatar shape="square" :size="30" :src="this.$store.state.user_info.user_profile" />
+          <el-avatar shape="square" :size="30" src="https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png" />
           <span style="margin-left:10px">{{ this.$store.state.user_info.user_name }}</span>
         </template>
   
