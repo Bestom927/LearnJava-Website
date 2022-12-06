@@ -1,5 +1,5 @@
 <template>
-    <h1>©нЁлуб╫з</h1>
+    <h1>Х╞╬Г╗▀Г╚═Х┼┌</h1>
     <!-- <div>lesson detail</div>
     <div>{{msg}}</div>
     <div>the lesson id is {{$route.params.lesson_id}}</div>
