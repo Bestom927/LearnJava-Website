@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img alt="Java logo" src="../assets/java.jpeg" style="width:30%">
     <HelloWorld msg="Welcome to Java Learning"/>
   </div>
 </template>

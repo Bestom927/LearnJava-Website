@@ -9,14 +9,14 @@
       @select="handleSelect"
     >
       <el-menu-item index="0"
-        ><img src="../assets/logo.png" class="logo"
+        ><img src="../assets/javalogo.png" class="logo"
       /></el-menu-item>
       <div class="flex-grow" />
       <el-menu-item index="home" @click="goHome">首页</el-menu-item>
       <el-menu-item index="lesson_center" @click="goLessonCenter"
         >我的课程</el-menu-item
       >
-      <el-menu-item index="anwser_center" @click="goAnwserCenter"
+      <el-menu-item index="answer_center" @click="goAnwserCenter"
         >我的答题</el-menu-item
       >
       <el-sub-menu index="6" v-if="is_login == false">
@@ -56,18 +56,8 @@
         router.push({ name: "lesson" });
       },
       goAnwserCenter(){
-        router.push({ name: "anwser" });
+        router.push({ name: "answer" });
     },
-      goNewsHome() {
-        router.push({
-          name: "newsHome",
-        });
-      },
-      goBlog() {
-        router.push({
-          name: "blog",
-        });
-      },
       goLogin() {
         router.push({
           name: "login",
@@ -78,71 +68,12 @@
           name: "register",
         });
       },
-  
-      //不应该在导航栏，此时仅为测试用
-      goAnswerDetail() {
-        router.push({
-          name: "answer_detail",
-          query: { question_id: 1, answer_id: 1 }, //模拟带参数路由
-        });
-      },
-      goInstitutionCenter() {
-        router.push({
-          name: "institution_center",
-        });
-      },
-      goSchoolCenter() {
-        router.push({
-          name: "school_center",
-        });
-      },
-      //测试高校
-      goSchoolDetail() {
-        router.push({
-          name: "school_detail",
-        });
-      },
       goPersonInformation() {
         router.push({
           name: "person_info",
         });
       },
-      goPersonSpace() {
-        router.push({
-          name: "person_space",
-          query: {
-            host_id: this.$store.state.user_info.user_id,
-          },
-        });
-      },
-      //测试机构
-      goInstitutionDetail() {
-        router.push({
-          name: "institution_detail",
-        });
-      },
-      //测试问题
-      goQuestion() {
-        router.push({
-          name: "question",
-          query: { question_id: 12 }, //模拟带参数路由
-        });
-      },
-      goQACenter() {
-        router.push({
-          name: "qa_center",
-        });
-      },
-      goBlogEdit() {
-        router.push({
-          name: "blog_edit",
-        });
-      },
-      goQuestionEdit() {
-        router.push({
-          name: "question_edit",
-        });
-      },
+
       //退出账号并跳转至首页
       loginOut() {
         this.$store.commit("loginOut");
