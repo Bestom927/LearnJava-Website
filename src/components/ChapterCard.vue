@@ -125,6 +125,7 @@ export default {
 .chapter-card__body__content {
     font-size: 14px;
     color: #999;
+    text-align: left;
 }
 
 .chapter-card__footer {

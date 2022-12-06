@@ -7,6 +7,7 @@
        <el-table-column prop="lesson" label="lesson" width="120" />
        <el-table-column prop="chapter" label="chapter" width="120" />
        <el-table-column prop="question" label="question" width="360" />
+       <el-table-column prop="student" label="student"  />
        <el-table-column prop="answer" label="answer"  />
        <el-table-column prop="date" label="Date" width="240" />
        <el-table-column label="score" width="240" >
@@ -31,6 +32,7 @@
          {
            lesson:"java",
            chapter:"java基础",
+           student:"张三",
            question:"java中的基本数据类型有哪些？",
            answer:"shit",
            date:"2021-05-02",

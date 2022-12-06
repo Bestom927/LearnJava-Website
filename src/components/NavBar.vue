@@ -13,10 +13,10 @@
       /></el-menu-item>
       <div class="flex-grow" />
       <el-menu-item index="home" @click="goHome">首页</el-menu-item>
-      <el-menu-item index="lesson_center" @click="goLessonCenter"
+      <el-menu-item v-if="this.$store.state.is_student" index="lesson_center" @click="goLessonCenter"
         >我的课程</el-menu-item
       >
-      <el-menu-item index="answer_center" @click="goAnwserCenter"
+      <el-menu-item v-if="this.$store.state.is_student" index="answer_center" @click="goAnwserCenter"
         >我的答题</el-menu-item
       >
 
