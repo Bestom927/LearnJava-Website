@@ -359,6 +359,7 @@
   }
   .body_card {
     width:98%;
+    height: 90vh;
     margin-left: 1%;
     border-radius: 17px;
     background: linear-gradient(#ffffffd0, #bdecfdd5);

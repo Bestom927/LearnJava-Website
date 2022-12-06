@@ -46,6 +46,10 @@
               </el-row>
             </div>
             <div class="buttonCard">
+              <input type="radio" v-model="picked" value="teacher" id="老师"/>
+              <label for="teacher">老师</label>
+              <input type="radio" v-model="picked" value="student" id="学生"/>
+              <label for="teacher">学生</label>
               <el-button type="primary" @click="login">登录</el-button>
             </div>
           </div>
@@ -65,6 +69,7 @@ export default {
     return {
       user_phone: "",
       user_password: "",
+      picked:"teacher",
     };
   },
   methods: {
@@ -89,7 +94,7 @@ export default {
           
           */
       axios
-        .post("/login/user", {
+        .post("/api/login/user", {
           name: this.user_phone,
           password: this.user_password,
         })
@@ -99,6 +104,7 @@ export default {
           console.log(response.state);
           if (response.status == true) {
             var user_info = response.data;
+            console.log(response.data);
             //若成功登录
             ElMessage({
               message: user_info.user_name + "，欢迎您！",
@@ -107,6 +113,12 @@ export default {
               duration: 2000,
             });
             store.commit("loginIn", user_info);
+            if(this.picked=="teacher"){
+              store.commit("loginInTeacher", user_info);
+            }else{
+              store.commit("loginInStudent", user_info);
+            }
+
             if (this.$route.query.redirect) {
               //若从其他页面跳转而来则跳转回其他页面
               this.$router.replace(this.$route.query.redirect);
@@ -171,6 +183,7 @@ export default {
 }
 .body_card {
   width:98%;
+  height: 90vh;
   margin-left: 1%;
   border-radius: 17px;
   background: linear-gradient(#ffffffd0, #bdecfdd5);

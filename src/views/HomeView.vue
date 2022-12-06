@@ -15,7 +15,6 @@ export default {
     HelloWorld
   },
   create(){
-    console.log(this.$store.state.is_login)
     if (!this.$store.state.is_login) {
       ElMessage({
         message: "ÇëÏÈµÇÂ¼",

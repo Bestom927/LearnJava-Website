@@ -53,10 +53,41 @@
         router.push({ name: "home" });
       },
       goLessonCenter(){
-        router.push({ name: "lesson" });
+        if (!this.$store.state.is_login) {
+          ElMessage({
+            message: "请先登录",
+            type: "warning",
+            showClose: true,
+            duration: 2000,
+          });
+          /**之后此处需记录当前页面路径，以便于登陆完成后跳转 */
+          this.$router.push({
+            path: "/login",
+            query: { redirect: '/lesson' },
+          });
+        }
+        else{
+          router.push({ name: "lesson" });
+        }
       },
       goAnwserCenter(){
-        router.push({ name: "allAnwserRecord" });
+        if (!this.$store.state.is_login) {
+          ElMessage({
+            message: "请先登录",
+            type: "warning",
+            showClose: true,
+            duration: 2000,
+          });
+          /**之后此处需记录当前页面路径，以便于登陆完成后跳转 */
+          this.$router.push({
+            path: "/login",
+            query: { redirect: '/allAnwserRecord' },
+          });
+        }
+        else{
+          router.push({ name: "allAnwserRecord" });
+        }
+        
     },
       goLogin() {
         router.push({

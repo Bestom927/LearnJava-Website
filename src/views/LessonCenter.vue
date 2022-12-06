@@ -37,9 +37,9 @@ export default {
       lesson_list: [
         {
           id: 1,
-          title:"test",
-          info:"just test", 
-          content:"just aaaaaa aaaaa aaaaa aaaaaa aaaaa aaaaaaa aaaaaaa aaaaa aaaaaaa aaaaaa  aa aaaaaaa aaa aaaa aaaaa aaaaa aaaaaaa aaaaaaaa aaaaaaa aaaaa a aa aaaaa aaaaaa aaaa aaaaaa aaa aaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaa aaaaaa aaaaaaa aaaa aaaaaa aaaaaaa aaaaaa aaaaaaa aaaaa  aa aaa a aa aaaa aaaaa aa aaaaaaaa a aa aaa aaaaaa aaaaaaaaa",
+          lessonTitle:"test",
+          lessonInfo:"just test", 
+          lessonContent:"just aaaaaa aaaaa aaaaa aaaaaa aaaaa aaaaaaa aaaaaaa aaaaa aaaaaaa aaaaaa  aa aaaaaaa aaa aaaa aaaaa aaaaa aaaaaaa aaaaaaaa aaaaaaa aaaaa a aa aaaaa aaaaaa aaaa aaaaaa aaa aaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaa aaaaaa aaaaaaa aaaa aaaaaa aaaaaaa aaaaaa aaaaaaa aaaaa  aa aaa a aa aaaa aaaaa aa aaaaaaaa a aa aaa aaaaaa aaaaaaaaa",
         } 
       ], //课程列表
       isLoading: false,
@@ -48,47 +48,24 @@ export default {
     };
   },
   methods: {
-    curChange(res) {
-      this.cur_page = res;
-      this.filter();
-    },
+
   },
   created() {
-    this.isCreated = true;
-    this.isLoading = true;
     axios({
-      url: "university/num" + "?rank_year=" + this.year_value,
+      url: "/api/lesson/selected",
+      params: {
+        student_id:this.$store.state.user_info.user_id,
+      },
       method: "get",
     })
       .then((res) => {
-        this.all_num = res.data.data.num;
-        this.page_num = Math.ceil(res.data.data.num / this.PAGESIZE); //向上取整
-        this.lesson_list = res.data.data.lesson_list;
-        //进行当页数据检索
-        axios({
-          url:
-            "university/rank" +
-            "?rank_year=" +
-            this.year_value +
-            "&" +
-            "page_size=" +
-            this.PAGESIZE,
-          method: "get",
-        })
-          .then((res) => {
-            this.lesson_list = res.data.data.university_list;
-            this.isLoading = false;
-          })
-          .catch((errMsg) => {
-            console.log(errMsg);
-            console.log("第二层初始化大失败");
-          });
+        this.lesson_list = res.data.data.lessons;
+        this.all_num = res.data.data.all_num;
+        this.isLoading = false;
       })
-      .catch((errMsg) => {
-        console.log(errMsg);
-        console.log("第一层初始化大失败");
+      .catch((err) => {
+        console.log(err);
       });
-    /*在此处向服务器请求数据，初始化所需变量*/
   }
 };
 </script>

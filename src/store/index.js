@@ -22,6 +22,8 @@ export default createStore({
       user_coin: -1
     },
     is_login: false,
+    is_student: false,
+    is_teacher: false,
     answer_user_info: {
       user_id: -1,
       user_email: "",
@@ -76,6 +78,26 @@ export default createStore({
         user_level: -1,
         user_coin: -1
       }
+    },
+    setStudent(){
+      state.is_student=true;
+      state.is_teacher=false;
+    },
+    loginInStudent(state,user_info){
+      state.is_login=true;
+      state.user_info=user_info;
+      state.is_student=true;
+      state.is_teacher=false;
+    },
+    setTeacher(){
+      state.is_student=false;
+      state.is_teacher=true;
+    },
+    loginInTeacher(state,user_info){
+      state.is_login=true;
+      state.user_info=user_info;
+      state.is_student=false;
+      state.is_teacher=true;
     },
     ChangeAnswerUserInfo(state,answer_user_info){
       state.answer_user_info=answer_user_info;

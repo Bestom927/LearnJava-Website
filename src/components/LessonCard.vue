@@ -2,15 +2,15 @@
     <div class="lesson-card">
         <div class="lesson-card__header">
         <div class="lesson-card__header__title">
-            <span class="lesson-card__header__title__text">{{ lesson.title }}</span>
+            <span class="lesson-card__header__title__text">{{ lesson.lessonTitle }}</span>
         </div>
         <div class="lesson-card__header__info">
-            <span class="lesson-card__header__info__text">{{ lesson.info }}</span>
+            <span class="lesson-card__header__info__text">{{ lesson.lessonInfo }}</span>
         </div>
         </div>
         <div class="lesson-card__body">
         <div class="lesson-card__body__content">
-            <span class="lesson-card__body__content__text">{{ lesson.content }}</span>
+            <span class="lesson-card__body__content__text">{{ lesson.lessonContent }}</span>
         </div>
         </div>
         <div class="lesson-card__footer">
@@ -35,9 +35,9 @@ export default {
             type: Object,
             required: true,
             id:1,
-            title:"test",
-            info:"just test",
-            content:"just test",
+            lessonTitle:"test",
+            lessonInfo:"just test",
+            lessonContent:"just test",
         },
     },
     methods: {
@@ -56,7 +56,7 @@ export default {
                 });
             } else {
                 this.$router.push({
-                    path: "/lessondetail/"+this.lesson.id,
+                    path: "/lessondetail/"+this.lesson.lessonId,
                     //query: { lesson_id: this.lesson.id },
                 });
             }
@@ -77,7 +77,7 @@ export default {
             } else {
                 this.$router.push({
                     path: "/learnrecord",
-                    query: { lesson_id: this.lesson.id },
+                    query: { lesson_id: this.lesson.lessonId},
                 });
             }
         },
@@ -97,7 +97,7 @@ export default {
             } else {
                 this.$router.push({
                     path: "/answerrecord",
-                    query: { lesson_id: this.lesson.id },
+                    query: { lesson_id: this.lesson.lessonId},
                 });
             }
         },
@@ -147,11 +147,14 @@ export default {
 }
 .lesson-card__body__content{
     position: absolute;
-    top: 35%;
+    top: 20%;
     left: 0;
-    width: 100%;
+    width: 90%;
     height: 45%;
     display: flex;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: left;
     justify-content: center;
     align-items: center;
 }
