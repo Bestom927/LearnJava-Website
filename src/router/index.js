@@ -3,7 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Lesson from '../views/LessonCenter.vue'
-import Answer from '../views/Answer.vue'
+import AnswerRecord from '../views/LessonAnswerRecord.vue'
+import LearnRecord from '../views/LessonLearnRecord.vue'
 import { ElMessage } from 'element-plus'
 
 const routes = [
@@ -31,14 +32,24 @@ const routes = [
     component:Register
   },
   {
+    path: '/allAnwserRecord',
+    name: 'allAnwserRecord',
+    component:()=>import('../views/AllAnwserRecord.vue')
+  },
+  {
     path: '/lesson',
     name: 'lesson',
     component:Lesson
   },
   {
-    path: '/answer',
-    name: 'answer',
-    component:Answer
+    path: '/learnrecord',
+    name: 'learnrecord',
+    component:LearnRecord
+  },
+  {
+    path: '/answerrecord',
+    name: 'answerrecord',
+    component:AnswerRecord
   },
   {
     path:'/lessonDetail/:lesson_id',

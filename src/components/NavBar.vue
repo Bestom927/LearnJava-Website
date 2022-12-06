@@ -56,7 +56,7 @@
         router.push({ name: "lesson" });
       },
       goAnwserCenter(){
-        router.push({ name: "answer" });
+        router.push({ name: "allAnwserRecord" });
     },
       goLogin() {
         router.push({
