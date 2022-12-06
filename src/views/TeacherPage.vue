@@ -3,7 +3,14 @@
         <h1>This is a teacher page</h1>
     </div>
     <router-link to="/teacher/reviewed">reviewed</router-link>|
-    <router-link to="/teacher/unreviewed">unreviewed</router-link>
+    <router-link to="/teacher/unreviewed">unreviewed</router-link>|
+    
+    <router-link to="/teacher/add_lesson">add_lesson</router-link>|
+    <router-link to="/teacher/add_chapter">add_chapter</router-link>|
+    <router-link to="/teacher/add_knowledge">add_knowldge</router-link>|
+    <router-link to="/teacher/add_question">add_question</router-link>
+
+    
   </template>
   
   <script>

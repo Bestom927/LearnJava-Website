@@ -9,8 +9,10 @@
        <el-table-column prop="question" label="question" width="360" />
        <el-table-column prop="answer" label="answer"  />
        <el-table-column prop="date" label="Date" width="240" />
-       <el-table-column label="score" width="240" ><input />
-           <button>确认</button>
+       <el-table-column label="score" width="240" >
+        <template  #default="scope">
+          <input v-model="scope.row.score"/>
+          <button>确认</button></template>
        </el-table-column>
    </el-table>
  </template>

@@ -81,6 +81,26 @@ const routes = [
     name:'teacherUnreviewed',
     component:()=>import('../views/TeacherUnreviewed.vue')
   },
+  {
+    path:'/teacher/add_lesson',
+    name:'teacherAddLesson',
+    component:()=>import('../views/TeacherAddLesson.vue')
+  },
+  {
+    path:'/teacher/add_chapter',
+    name:'teacherAddChapter',
+    component:()=>import('../views/TeacherAddChapter.vue')
+  },
+  {
+    path:'/teacher/add_knowledge',
+    name:'teacherAddKnowledge',
+    component:()=>import('../views/TeacherAddKnowledge.vue')
+  },
+  {
+    path:'/teacher/add_question',
+    name:'teacherAddQuestion',
+    component:()=>import('../views/TeacherAddQuestion.vue')
+  },
 ]
 
 const router = createRouter({

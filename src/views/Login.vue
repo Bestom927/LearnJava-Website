@@ -94,48 +94,88 @@ export default {
       /*此处日后需要加数据格式验证
           
           */
-      axios
-        .post("/api/login/user", {
-          name: this.user_phone,
-          password: this.user_password,
-        })
-        .then((res) => {
-          console.log(res);
-          var response = res.data;
-          console.log(response.state);
-          if (response.status == true) {
-            var user_info = response.data;
-            console.log(response.data);
-            //若成功登录
-            ElMessage({
-              message: user_info.user_name + "，欢迎您！",
-              type: "success",
-              showClose: true,
-              duration: 2000,
-            });
-            store.commit("loginIn", user_info);
-            if(this.picked=="teacher"){
-              store.commit("loginInTeacher", user_info);
+          if(this.picked=="teacher"){
+            axios
+              .post("/api/login/teacher", {
+                name: this.user_phone,
+                password: this.user_password,
+              })
+              .then((res) => {
+                console.log(res);
+                var response = res.data;
+                console.log(response.state);
+                if (response.status == true) {
+                  var user_info = response.data;
+                  console.log(response.data);
+                  //若成功登录
+                  ElMessage({
+                    message: user_info.user_name + "，欢迎您！",
+                    type: "success",
+                    showClose: true,
+                    duration: 2000,
+                  });
+                  store.commit("loginIn", user_info);
+                  store.commit("loginInTeacher", user_info);
+                  if (this.$route.query.redirect) {
+                    //若从其他页面跳转而来则跳转回其他页面
+                    this.$router.replace(this.$route.query.redirect);
+                  } else {
+                    //否则默认到首页
+                    this.$router.replace("/home");
+                  }
+                } else {
+                  //若登录失败
+                  ElMessage.error("用户手机号或密码不正确！");
+                  (this.user_phone = ""), (this.user_password = "");
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+              
             }else{
-              store.commit("loginInStudent", user_info);
+              axios
+              .post("/api/login/user", {
+                name: this.user_phone,
+                password: this.user_password,
+              })
+              .then((res) => {
+                console.log(res);
+                var response = res.data;
+                console.log(response.state);
+                if (response.status == true) {
+                  var user_info = response.data;
+                  console.log(response.data);
+                  //若成功登录
+                  ElMessage({
+                    message: user_info.user_name + "，欢迎您！",
+                    type: "success",
+                    showClose: true,
+                    duration: 2000,
+                  });
+                  store.commit("loginIn", user_info);
+                  store.commit("loginInStudent", user_info);
+                  if (this.$route.query.redirect) {
+                    //若从其他页面跳转而来则跳转回其他页面
+                    this.$router.replace(this.$route.query.redirect);
+                  } else {
+                    //否则默认到首页
+                    this.$router.replace("/home");
+                  }
+                } else {
+                  //若登录失败
+                  ElMessage.error("用户手机号或密码不正确！");
+                  (this.user_phone = ""), (this.user_password = "");
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+              
             }
 
-            if (this.$route.query.redirect) {
-              //若从其他页面跳转而来则跳转回其他页面
-              this.$router.replace(this.$route.query.redirect);
-            } else {
-              //否则默认到首页
-              this.$router.replace("/home");
-            }
-          } else {
-            //若登录失败
-            ElMessage.error("用户手机号或密码不正确！");
-            (this.user_phone = ""), (this.user_password = "");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+
+ 
     },
   },
   axios,

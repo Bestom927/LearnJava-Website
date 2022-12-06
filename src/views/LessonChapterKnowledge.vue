@@ -1,4 +1,5 @@
 <template>
+    <h1>The knowledge of {{this.chapter_name}} in Java</h1>
     <div v-for="(knowledge, index) in knowledge_list" :key="index">
      <KnowledgeCard :knowledge="knowledge"></KnowledgeCard>
      <br />
@@ -30,15 +31,10 @@ export default {
      }
  },
  props: {
-     knowledge: {
-         type: Object,
-         required: true,
-         lesson_id:1,
-         id:1,
-         title:"test",
-         info:"just test",
-         content:"just test",
-     }
+     chapter_name: {
+         type: String,
+         default: "chapter",
+     },
  },
  methods: {
      handleClick() {
@@ -65,7 +61,7 @@ export default {
  created(){
      this.chapter_id = this.$route.params.chapter_id; 
      axios({
-       url: "lesson/knowledge_list" ,
+       url: "/api/knowledge/getList" ,
          params: {
             lesson_id: this.$route.params.lesson_id,
             chapter_id: this.chapter_id,
@@ -73,7 +69,8 @@ export default {
        method: "get",
      })
        .then((res) => {
-         this.knowledge_list = res.data.data.knowledge_list;
+         this.knowledge_list = res.data.data.knowledge;
+         console.log(this.knowledge_list);
        })
        .catch((err) => {
          console.log(err);

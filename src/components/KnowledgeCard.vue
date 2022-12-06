@@ -2,7 +2,7 @@
     <div class="knowledge-card">
         <div class="knowledge-card__header">
             <div class="knowledge-card__header__title">
-                <span class="knowledge-card__header__title__text">{{ knowledge.title }}</span>
+                <span class="knowledge-card__header__title__text">{{ knowledge.knowledgeTitle }}</span>
             </div>
             <div class="knowledge-card__header__info">
                 <span class="knowledge-card__header__info__text">{{ knowledge.info }}</span>
@@ -10,7 +10,7 @@
         </div>
         <div class="knowledge-card__body">
             <div class="knowledge-card__body__content">
-                <span class="knowledge-card__body__content__text">{{ knowledge.content }}</span>
+                <span class="knowledge-card__body__content__text">{{ knowledge.knowledgeContent }}</span>
             </div>
         </div>
         <div class="knowledge-card__footer">
@@ -30,9 +30,9 @@ export default {
             type: Object,
             required: true,
             id:1,
-            title:"test",
+            knowledgeTitle:"test",
             info:"just test",
-            content:"just test",
+            knowledgeContent:"just test",
         },
     },
     methods: {
@@ -68,16 +68,16 @@ export default {
 </script>
 <style scoped>
 .knowledge-card {
-    width: 100%;
+    width: 98%;
     height: 100%;
-    background-color: #fff;
+    background: linear-gradient(#ffffffd0, #bdecfdd5);
     border-radius: 10px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    margin-left: 1%;
+
 }
 .knowledge-card__header {
     width: 100%;
@@ -107,7 +107,6 @@ export default {
 }
 .knowledge-card__header__info__text {
     font-size: 14px;
-    color: #999;
 }
 .knowledge-card__body {
     width: 100%;
@@ -117,11 +116,30 @@ export default {
     align-items: center;
 }
 .knowledge-card__body__content {
-    width: 100%;
+    width: 90%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.knowledge-card__body__content__text {
+    font-size: 14px;
+    color: #999;
+    text-align: left;
+}
+
+.knowledge-card__footer {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.knowledge-card__footer__btn {
+    margin-right: 20px;
 }
 
 </style>

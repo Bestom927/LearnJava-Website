@@ -56,7 +56,7 @@ export default {
                 });
             } else {
                 this.$router.push({
-                    path: "/lessondetail/"+this.chapter.lesson_id+"/"+this.chapter.id+"/knowledge",
+                    path: "/lessondetail/"+this.chapter.corrLessonId+"/"+this.chapter.chapterId+"/knowledge",
                     //query: { lesson_id: this.lesson.id },
                 });
             }
@@ -76,7 +76,7 @@ export default {
                 });
             } else {
                 this.$router.push({
-                    path: "/lessondetail/"+this.chapter.lesson_id+"/"+this.chapter.id+"/question",
+                    path: "/lessondetail/"+this.chapter.corrLessonId+"/"+this.chapter.chapterId+"/question",
                     //query: { lesson_id: this.lesson.id },
                 });
             }
