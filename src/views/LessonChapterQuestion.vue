@@ -1,6 +1,6 @@
 <template>
-       <div v-for="(question, index) in question_list" :key="index">
-        <QuestionCard :question="question"></QuestionCard>
+       <div v-for="(shortAnswerQuestion, index) in shortAnswerQuestionList" :key="index">
+        <QuestionCard :question="shortAnswerQuestion"></QuestionCard>
         <br />
     </div>
 </template>
@@ -17,7 +17,7 @@ export default {
     data() {
         return {
             chapter_id:0,
-            question_list:[
+            shortAnswerQuestionList:[
             {
               chapter_id:1,
           id: 1,
@@ -65,11 +65,16 @@ export default {
     created(){
         this.chapter_id = this.$route.params.chapter_id; 
         axios({
-          url: "lesson/question_list" + "?chapter_id=" + this.chapter_id,
+          url: "/api/question/chapter",
+          params:{
+            chapter_id:this.chapter_id,
+            user_id:this.$store.state.user_info.user_id,
+          },
+          
           method: "get",
         })
           .then((res) => {
-            this.question_list = res.data.data.question_list;
+            this.shortAnswerQuestionList = res.data.data.shortAnswerQuestionList;
           })
           .catch((err) => {
             console.log(err);

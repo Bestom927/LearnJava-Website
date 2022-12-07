@@ -2,18 +2,14 @@
     <div class="question-card">
         <div class="question-card__header">
             <div class="question-card__header__title">
-                <span class="question-card__header__title__text">{{ question.title }}</span>
+                <span class="question-card__header__title__text">{{ question.detail.questionContent }}</span>
             </div>
             <div class="question-card__header__info">
-                <span class="question-card__header__info__text">{{ question.info }}</span>
+                <span class="question-card__header__info__text">分值：{{ question.detail.score }}</span>
             </div>
         </div>
-        <div class="question-card__body">
-            <div class="question-card__body__content">
-                <span class="question-card__body__content__text">{{ question.content }}</span>
-            </div>
-        </div>
-        <div class="question-card__footer">
+        
+        <div class="question-card__footer" v-if="question.haveBeenAnswered">
             <textarea  v-if="this.isAnswer" v-model="answer"></textarea>
             <div class="question-card__footer__btn" v-if="!this.isAnswer" >
                 <el-button type="primary" @click="handleClick">开始作答</el-button>
@@ -22,6 +18,12 @@
                 <el-button type="primary" @click="submitAnswer">提交</el-button>
                 
                 <el-button type="primary" @click="cancelAnswer">取消</el-button>
+            </div>
+        </div>
+        <div class="question-card__footer" v-if="!question.haveBeenAnswered">
+            <div class="question-card__footer__btn" >
+                <div>已作答</div>
+                <el-button type="primary" @click="handleClick">查看作答记录</el-button>
             </div>
         </div>
     </div>
@@ -103,7 +105,7 @@ export default {
 .question-card {
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    background-color:linear-gradient(#ffffffd0, #bdecfdd5);
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     display: flex;
@@ -128,7 +130,7 @@ export default {
     align-items: center;
 }
 .question-card__header__title__text {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 600;
 }
 .question-card__header__info {
@@ -139,7 +141,7 @@ export default {
     align-items: center;
 }
 .question-card__header__info__text {
-    font-size: 14px;
+    font-size: 20px;
     color: #999;
 }
 .question-card__body {
@@ -155,6 +157,18 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.question-card__footer {
+    margin-top: 2%;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.question-card__footer__btn {
+    font-size: 20px;
+    color: rgb(224, 25, 25);
 }
 
 </style>

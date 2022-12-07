@@ -54,9 +54,9 @@ export default {
                 //     path: "/knowledgedetail",
                 //     query: { knowledge_id: this.knowledge.id },
                 // });
-                console.log("finish"+this.knowledge.id);
+                console.log("finish"+this.knowledge.knowledgeId);
                 ElMessage({
-                  message: "已学习"+this.knowledge.title,
+                  message: "已学习知识点"+this.knowledge.knowledgeId,
                   type: "success",
                   showClose: true,
                   duration: 2000,
@@ -124,7 +124,7 @@ export default {
 }
 
 .knowledge-card__body__content__text {
-    font-size: 14px;
+    font-size: 20px;
     color: #999;
     text-align: left;
 }

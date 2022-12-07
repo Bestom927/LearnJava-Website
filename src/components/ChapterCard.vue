@@ -109,12 +109,12 @@ export default {
 }
 
 .chapter-card__header__title {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
 }
 
 .chapter-card__header__info {
-    font-size: 14px;
+    font-size: 20px;
     color: #999;
 }
 
@@ -123,7 +123,7 @@ export default {
 }
 
 .chapter-card__body__content {
-    font-size: 14px;
+    font-size: 20px;
     color: #999;
     text-align: left;
 }

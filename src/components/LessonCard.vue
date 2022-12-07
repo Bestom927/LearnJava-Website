@@ -132,7 +132,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-weight: bold;
 }
 .lesson-card__header__info{
@@ -155,6 +155,7 @@ export default {
     margin-left: 5%;
     margin-right: 5%;
     text-align: left;
+    font: 1.3em sans-serif;
     justify-content: center;
     align-items: center;
 }
