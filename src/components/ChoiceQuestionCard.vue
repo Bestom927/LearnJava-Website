@@ -1,31 +1,45 @@
 <template>
-    <div class="question-card">
-        <div class="question-card__header">
-            <div class="question-card__header__title">
-                <span class="question-card__header__title__text">{{ question.detail.questionContent }}</span>
+    <div class="choiceQuestion-card">
+        <div class="choiceQuestion-card__header">
+            <div class="choiceQuestion-card__header__title">
+                <span class="choiceQuestion-card__header__title__text">{{ choiceQuestion.detail.questionContent }}</span>
             </div>
-            <div class="question-card__header__info">
-                <span class="question-card__header__info__text">分值：{{ question.detail.score }}</span>
+            <div class="choiceQuestion-card__header__info">
+                <span class="choiceQuestion-card__header__info__text">分值：{{ choiceQuestion.detail.score }}</span>
             </div>
         </div>
         
-        <div class="question-card__footer" v-if="!question.haveBeenAnswered">
-            <textarea  v-if="this.isAnswer" v-model="answer"></textarea>
-            <div class="question-card__footer__btn" v-if="!this.isAnswer" >
+        <div class="choiceQuestion-card__footer" >
+            <input type="radio" v-model="picked" value="A" id="A"/>
+            <label for="A">A.{{ choiceQuestion.detail.choiceA}}</label>
+            <br />
+            <input type="radio" v-model="picked" value="B" id="B"/>
+            <label for="B">B.{{ choiceQuestion.detail.choiceB}}</label>
+            <br/>
+            <input type="radio" v-model="picked" value="C" id="C"/>
+            <label for="C">C.{{ choiceQuestion.detail.choiceB}}</label>
+            <br/>
+            <input type="radio" v-model="picked" value="D" id="D"/>
+            <label for="D">D.{{ choiceQuestion.detail.choiceB}}</label>
+            <br/>
+        </div>
+        <div class="choiceQuestion-card__footer" v-if="choiceQuestion.haveBeenAnswered">
+            <div class="choiceQuestion-card__footer__btn" >
+                <div v-if="!this.checkRecord">已作答</div>
+                <div v-if="this.checkRecord">{{question.thisUserAnswer}}</div>
+                <el-button type="primary" @click="handleCheckRecord" v-if="!this.checkRecord">查看作答记录</el-button>  
+                <el-button type="primary" @click="handleCheckRecord" v-if="this.checkRecord">收起</el-button>
+            </div>
+        </div>
+        <div class="choiceQuestion-card__footer" v-if="!choiceQuestion.haveBeenAnswered">
+            
+            <div class="choiceQuestion-card__footer__btn" v-if="!this.isAnswer" >
                 <el-button type="primary" @click="handleClick">开始作答</el-button>
             </div>
-            <div class="question-card__footer__btn" v-if="this.isAnswer" >
+            <div class="choiceQuestion-card__footer__btn" v-if="this.isAnswer" >
                 <el-button type="primary" @click="submitAnswer">提交</el-button>
                 
                 <el-button type="primary" @click="cancelAnswer">取消</el-button>
-            </div>
-        </div>
-        <div class="question-card__footer" v-if="question.haveBeenAnswered">
-            <div class="question-card__footer__btn" >
-                <div v-if="!this.checkRecord">已作答</div>
-                <div v-if="this.checkRecord">{{question.thisUserAnswer}}</div>
-                <el-button type="primary" @click="handleCheckRecord" v-if="!this.checkRecord">查看作答记录</el-button>
-                <el-button type="primary" @click="handleCheckRecord" v-if="this.checkRecord">收起</el-button>
             </div>
         </div>
     </div>
@@ -34,17 +48,18 @@
 import { ElMessage } from "element-plus";
 import axios from "axios";
 export default {
-    name: "questionCard",
+    name: "choiceQuestionCard",
     data(){
         return{
             isAnswer:false,
             answer:"",
+            picked:"A",
             checkRecord:false,
         }
 
     },
     props: {
-        question: {
+        choiceQuestion: {
             type: Object,
             required: true,
             id:1,
@@ -69,17 +84,17 @@ export default {
                 });
             } else {
                 // this.$router.push({
-                //     path: "/questiondetail",
-                //     query: { question_id: this.question.id },
+                //     path: "/choiceQuestiondetail",
+                //     query: { choiceQuestion_id: this.choiceQuestion.id },
                 // });
-                console.log(this.question.title);
+                console.log(this.choiceQuestion.title);
                 this.isAnswer=true;
             }
         },
         submitAnswer(){
             axios
                 .post("/answer", {
-                    question_id: this.question.id,
+                    choiceQuestion_id: this.choiceQuestion.id,
                     answer: this.answer,
                 })
                 .then((res) => {
@@ -89,15 +104,14 @@ export default {
                     console.log(err);
                 });
             ElMessage({
-                    message: "已提交题目"+this.question.detail.shortAnswerQuestionId,
+                    message: "已提交题目"+this.choiceQuestion.detail.choiceQuestionId,
                     type: "success",
                     showClose: true,
                     duration: 2000,
                 });
             console.log("submit "+this.answer);
             this.isAnswer=false;
-            this.question.haveBeenAnswered=true;
-            this.question.thisUserAnswer=this.answer;
+            this.choiceQuestion.haveBeenAnswered=true;
         },
         cancelAnswer(){
             console.log("cancel");
@@ -106,11 +120,12 @@ export default {
         handleCheckRecord(){
             this.checkRecord=!this.checkRecord;
         }
+        
     },
 };
 </script>
 <style scoped>
-.question-card {
+.choiceQuestion-card {
     width: 100%;
     height: 100%;
     background-color:linear-gradient(#ffffffd0, #bdecfdd5);
@@ -122,7 +137,7 @@ export default {
     align-items: center;
     padding: 20px;
 }
-.question-card__header {
+.choiceQuestion-card__header {
     width: 100%;
     height: 20%;
     display: flex;
@@ -130,51 +145,50 @@ export default {
     justify-content: space-between;
     align-items: center;
 }
-.question-card__header__title {
+.choiceQuestion-card__header__title {
     width: 100%;
     height: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.question-card__header__title__text {
+.choiceQuestion-card__header__title__text {
     font-size: 30px;
     font-weight: 600;
 }
-.question-card__header__info {
+.choiceQuestion-card__header__info {
     width: 100%;
     height: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.question-card__header__info__text {
+.choiceQuestion-card__header__info__text {
     font-size: 20px;
     color: #999;
 }
-.question-card__body {
+.choiceQuestion-card__body {
     width: 100%;
     height: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.question-card__body__content {
+.choiceQuestion-card__body__content {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.question-card__footer {
+.choiceQuestion-card__footer {
     margin-top: 2%;
     width: 100%;
     height: 20%;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
-.question-card__footer__btn {
+.choiceQuestion-card__footer__btn {
     font-size: 20px;
     color: rgb(224, 25, 25);
 }

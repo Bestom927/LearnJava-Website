@@ -47,7 +47,7 @@
             </div>
             <div class="buttonCard">
               <input type="radio" v-model="picked" value="student" id="学生"/>
-              <label for="teacher">学生</label>
+              <label for="student">学生</label>
               <input type="radio" v-model="picked" value="teacher" id="老师"/>
               <label for="teacher">老师</label>
               
