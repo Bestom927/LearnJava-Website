@@ -23,7 +23,8 @@
         <div class="question-card__footer" v-if="question.haveBeenAnswered">
             <div class="question-card__footer__btn" >
                 <div v-if="!this.checkRecord">已作答</div>
-                <div v-if="this.checkRecord">{{question.thisUserAnswer}}</div>
+                <div v-if="this.checkRecord">你的答案：{{question.thisUserAnswer}}</div>
+                <div v-if="this.checkRecord">参考答案：{{question.detail.referenceAnswer}}</div>
                 <el-button type="primary" @click="handleCheckRecord" v-if="!this.checkRecord">查看作答记录</el-button>
                 <el-button type="primary" @click="handleCheckRecord" v-if="this.checkRecord">收起</el-button>
             </div>
@@ -72,15 +73,17 @@ export default {
                 //     path: "/questiondetail",
                 //     query: { question_id: this.question.id },
                 // });
-                console.log(this.question.title);
+                //console.log(this.question.title);
                 this.isAnswer=true;
             }
         },
         submitAnswer(){
             axios
-                .post("/answer", {
-                    question_id: this.question.id,
-                    answer: this.answer,
+                .post("/api/question/answer", {
+                    question_type: "short_answer_question",
+                    question_id: this.question.detail.shortAnswerQuestionId,
+                    user_id: this.$store.state.user_info.user_id,
+                    user_answer: this.answer,
                 })
                 .then((res) => {
                     console.log(res);

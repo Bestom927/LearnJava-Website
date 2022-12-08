@@ -50,7 +50,7 @@ export default {
       ],
     };
   },
-  create() {
+  created() {
     if (!this.$store.state.is_login) {
       ElMessage({
         message: "请先登录",

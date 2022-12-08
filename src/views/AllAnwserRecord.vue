@@ -48,7 +48,7 @@
         });
       }
       axios
-      .get("/api/all_answer_record", {
+      .get("/api/answerSituation/getByuserId", {
         params: {
           user_id: this.$store.state.user_id,
         },

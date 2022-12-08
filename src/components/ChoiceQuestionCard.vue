@@ -26,7 +26,8 @@
         <div class="choiceQuestion-card__footer" v-if="choiceQuestion.haveBeenAnswered">
             <div class="choiceQuestion-card__footer__btn" >
                 <div v-if="!this.checkRecord">已作答</div>
-                <div v-if="this.checkRecord">{{question.thisUserAnswer}}</div>
+                <div v-if="this.checkRecord">你的答案：{{choiceQuestion.thisUserAnswer}}</div>
+                <div v-if="this.checkRecord">参考答案：{{choiceQuestion.detail.questionAnswer}}</div>
                 <el-button type="primary" @click="handleCheckRecord" v-if="!this.checkRecord">查看作答记录</el-button>  
                 <el-button type="primary" @click="handleCheckRecord" v-if="this.checkRecord">收起</el-button>
             </div>
@@ -52,7 +53,7 @@ export default {
     data(){
         return{
             isAnswer:false,
-            answer:"",
+            //answer:"",
             picked:"A",
             checkRecord:false,
         }
@@ -87,15 +88,17 @@ export default {
                 //     path: "/choiceQuestiondetail",
                 //     query: { choiceQuestion_id: this.choiceQuestion.id },
                 // });
-                console.log(this.choiceQuestion.title);
+                //console.log(this.choiceQuestion.title);
                 this.isAnswer=true;
             }
         },
         submitAnswer(){
             axios
-                .post("/answer", {
-                    choiceQuestion_id: this.choiceQuestion.id,
-                    answer: this.answer,
+            .post("/api/question/answer", {
+                    question_type: "choice_question",
+                    question_id: this.choiceQuestion.detail.choiceQuestionId,
+                    user_id: this.$store.state.user_info.user_id,
+                    user_answer: this.picked,
                 })
                 .then((res) => {
                     console.log(res);
@@ -109,7 +112,7 @@ export default {
                     showClose: true,
                     duration: 2000,
                 });
-            console.log("submit "+this.answer);
+            console.log("submit "+this.picked);
             this.isAnswer=false;
             this.choiceQuestion.haveBeenAnswered=true;
         },

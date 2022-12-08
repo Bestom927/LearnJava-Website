@@ -1,13 +1,13 @@
 <template>
-    <div>this is anwser</div>
+    <h1>{{this.tableData[0].lesson_name}}的答题记录</h1>
     
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="date" label="Date" width="240" />
-      <el-table-column prop="name" label="Name" width="240" />
-      <el-table-column prop="address" label="Address" />
-      <el-table-column prop="progress" label="Progress">
+      <!-- <el-table-column prop="date" label="Date" width="240" /> -->
+      <el-table-column prop="lesson_name" label="Lesson" width="240" />
+      <el-table-column prop="chapter_name" label="Chapter" />
+      <el-table-column prop="finish_rate" label="Progress">
         <template  #default="scope">
-        <Progress :width="600" :progress="scope.row.progress" :strokeWidth="10" :showInfo="true" /></template>
+        <Progress :width="600" :progress="scope.row.progress" :strokeWidth="10" :showInfo="false" /></template>
       </el-table-column>
     </el-table>
   </template>
@@ -23,34 +23,19 @@
       return {
         lesson_id: this.$route.query.lesson_id,
         tableData: [
-          {
-            date: "2016-05-02",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1518 弄",
-            progress:36
-          },
-          {
-            date: "2016-05-04",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1517 弄",
-            progress:36
-          },
-          {
-            date: "2016-05-01",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1519 弄",
-            progress:90
-          },
-          {
-            date: "2016-05-03",
-            name: "王小虎",
-            address: "上海市普陀区金沙江路 1516 弄",
-            progress:33
-          },
+        {
+                lesson_name: "test语言程序设计",
+                total_question_num: 3,
+                chapter_name: "第一章 Java语言与程序设计基础",
+                "already_done_question_num": 2,
+                "finish_rate": 66,
+                "chapter_id": 1,
+                "not_done_question_num": 1
+            },
         ],
       };
     },
-    create() {
+    created() {
       if (!this.$store.state.is_login) {
         ElMessage({
           message: "请先登录",
@@ -64,16 +49,16 @@
           query: { redirect: this.$route.fullPath },
         });
       }
-      axios
-      .get("/api/lesson_answer_record", {
+
+      axios.get("/api/question/lesson", {
         params: {
-          user_id: this.$store.state.user_id,
+          user_id: this.$store.state.user_info.user_id,
           lesson_id: this.$route.query.lesson_id,
         },
       })
       .then((res) => {
-        console.log(res);
-        this.tableData = res.data;
+        console.log(res.data.data.data);
+        this.tableData = res.data.data.data;
       })
       .catch((err) => {
         console.log(err);
