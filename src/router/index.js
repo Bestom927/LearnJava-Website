@@ -73,7 +73,7 @@ const routes = [
   },
   {
     path:'/teacher/reviewed',
-    name:'teacherReviewed',
+    name:'TeacherReviewed',
     component:()=>import('../views/TeacherReviewed.vue')
   },
   {

@@ -4,17 +4,14 @@
    </div>
    
    <el-table :data="tableData" style="width: 100%">
-       <el-table-column prop="lesson" label="lesson" width="120" />
-       <el-table-column prop="chapter" label="chapter" width="120" />
-       <el-table-column prop="question" label="question" width="360" />
-       <el-table-column prop="student" label="student"  />
-       <el-table-column prop="answer" label="answer"  />
-       <el-table-column prop="date" label="Date" width="240" />
-       <el-table-column label="score" width="240" >
-        <template  #default="scope">
-          <input v-model="scope.row.score"/>
-          <button>确认</button></template>
-       </el-table-column>
+       <el-table-column prop="lesson_title" label="lesson"  />
+       <el-table-column prop="chapter_title" label="chapter"  />
+       <el-table-column prop="question_content" label="question"  />
+       <el-table-column prop="user_answer" label="answer"  />
+       <el-table-column prop="reference_answer" label="reference answer"  />
+       <el-table-column prop="answer_time" label="review time"  />
+       <el-table-column prop="score" label="score"  />
+       <el-table-column prop="score_for_this_question" label="total score"  />
    </el-table>
  </template>
  
@@ -23,7 +20,7 @@
  import axios from "axios";
  import Progress from "@/components/Progress.vue";
  export default {
-   name: "AnswerRecord",
+   name: "TeacherReviewed",
    components: {Progress},
    data() {
      return {
@@ -41,7 +38,7 @@
        ],
      };
    },
-   create() {
+   created() {
      if (!this.$store.state.is_login) {
        ElMessage({
          message: "请先登录",
@@ -56,14 +53,15 @@
        });
      }
      axios
-     .get("/api/all_answer_record", {
-       params: {
-         user_id: this.$store.state.user_id,
-       },
+     .get("/api/judge/getAllRecords", {
      })
      .then((res) => {
-       console.log(res);
-       this.tableData = res.data;
+       console.log(res.data.data.JudgedList);
+       this.tableData = res.data.data.JudgedList;
+       //把时间改成本地时间
+        for (let i = 0; i < this.tableData.length; i++) {
+          this.tableData[i].answer_time = new Date(this.tableData[i].answer_time).toLocaleString();
+        }
      })
      .catch((err) => {
        console.log(err);

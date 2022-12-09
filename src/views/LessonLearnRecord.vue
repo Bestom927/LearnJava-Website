@@ -3,6 +3,8 @@
   
   <el-table :data="tableData" style="width: 100%">
     <el-table-column prop="chapter_title" label="Chapter" width="400" />
+    <el-table-column prop="overall_knowledge_num" label="Total num" width="120"/>
+      <el-table-column prop="learnt_knowledge_num" label="Finished num" width="240"/>
     <el-table-column prop="learnt_knowledge_num/overall_knowledge_num*100" label="Progress" style="position:absolute;left: 500;">
       <template  #default="scope">
       <Progress :width="600" :progress="scope.row.progress" :strokeWidth="10" :showInfo="false" /></template>

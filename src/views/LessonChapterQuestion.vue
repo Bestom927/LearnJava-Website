@@ -1,4 +1,5 @@
 <template>
+    <div class="lesson-chapter-question">
        <div v-for="(shortAnswerQuestion, index) in shortAnswerQuestionList" :key="index">
         <QuestionCard :question="shortAnswerQuestion"></QuestionCard>
         <br />
@@ -6,7 +7,7 @@
     <div v-for="(choiceAnswer, index) in choiceAnswerList" :key="index">
         <ChoiceQuestionCard :choiceQuestion="choiceAnswer"></ChoiceQuestionCard>
         <br />
-    </div>
+    </div></div>
 </template>
 
 <script>
@@ -96,16 +97,5 @@ export default {
 
 <style>
 .lesson-chapter-question {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    box-sizing: border-box;
 }
 </style>

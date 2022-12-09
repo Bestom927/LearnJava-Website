@@ -26,10 +26,7 @@
         <div class="question-card__footer" v-if="question.haveBeenAnswered">
             <div class="question-card__footer__btn" >
                 <div v-if="!this.checkRecord">已作答</div>
-                <div v-if="this.checkRecord">你的答案：{{question.thisUserAnswer}}</div>
-                <div v-if="this.checkRecord">参考答案：{{question.detail.referenceAnswer}}</div>
                 <el-button type="primary" @click="handleCheckRecord" v-if="!this.checkRecord">查看作答记录</el-button>
-                <el-button type="primary" @click="handleCheckRecord" v-if="this.checkRecord">收起</el-button>
             </div>
         </div>
     </div>
@@ -110,7 +107,11 @@ export default {
             this.isAnswer=false;
         },
         handleCheckRecord(){
-            this.checkRecord=!this.checkRecord;
+            //转到查看作答记录页面
+            this.checkRecord=true;
+            this.$router.push({
+                path: "/allAnwserRecord",
+            });
         }
     },
 };
