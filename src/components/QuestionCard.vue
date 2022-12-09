@@ -15,7 +15,9 @@
                 <textarea  v-if="this.isAnswer" v-model="answer" cols="240" rows="4"></textarea>
             <br/>
             <div v-if="!this.isAnswer">
-                <el-button type="primary" @click="handleClick" >开始作答</el-button>
+                <el-button type="primary" @click="handleClick" >  <el-icon :size="20">
+    <Edit />
+  </el-icon>开始作答</el-button>
             </div>
                 <div v-if="this.isAnswer">
                 <el-button type="primary" @click="submitAnswer">提交</el-button>

@@ -13,7 +13,7 @@
      <el-table-column label="score"  >
       <template  #default="scope">
         <input v-model="scope.row.score"/>
-        <button>确认</button></template>
+        <button @click="reviewAnswer( scope.row)">确认</button></template>
      </el-table-column>
  </el-table>
 </template>
@@ -70,5 +70,30 @@ export default {
      console.log(err);
    });
  },
+
+  methods: {
+    reviewAnswer(data) {
+      console.log(data);
+      console.log(data.answer_situation_id);
+      axios
+      .post("/api/judge/post", {
+        answer_situation_id: data.answer_situation_id,
+        teacher_id: this.$store.state.user_info.user_id,
+        score: data.score,
+      })
+      .then((res) => {
+        console.log(res);
+        ElMessage({
+          message: "评分成功",
+          type: "success",
+          showClose: true,
+          duration: 2000,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    },
+  },
 };
 </script>

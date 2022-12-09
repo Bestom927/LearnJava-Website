@@ -35,7 +35,9 @@
         <div class="choiceQuestion-card__footer" v-if="!choiceQuestion.haveBeenAnswered">
             
             <div class="choiceQuestion-card__footer__btn" v-if="!this.isAnswer" >
-                <el-button type="primary" @click="handleClick">开始作答</el-button>
+                <el-button type="primary" @click="handleClick">  <el-icon :size="20">
+    <Edit />
+  </el-icon>开始作答</el-button>
             </div>
             <div class="choiceQuestion-card__footer__btn" v-if="this.isAnswer" >
                 <el-button type="primary" @click="submitAnswer">提交</el-button>

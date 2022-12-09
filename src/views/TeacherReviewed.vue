@@ -9,7 +9,7 @@
        <el-table-column prop="question_content" label="question"  />
        <el-table-column prop="user_answer" label="answer"  />
        <el-table-column prop="reference_answer" label="reference answer"  />
-       <el-table-column prop="answer_time" label="review time"  />
+       <el-table-column prop="answer_time" label="review time"  :render-header="RenderHeader" />
        <el-table-column prop="score" label="score"  />
        <el-table-column prop="score_for_this_question" label="total score"  />
    </el-table>
@@ -67,5 +67,17 @@
        console.log(err);
      });
    },
+   methods:{
+        
+RenderHeader(){
+  return (
+    <div style="vertical-align:middle;"> 
+      <el-icon><Clock /></el-icon>
+      <span>review time</span>
+    </div>
+  )
+}
+   }
  };
  </script>
+

@@ -2,7 +2,7 @@
     <div class="knowledge-card">
         <div class="knowledge-card__header">
             <div class="knowledge-card__header__title">
-                <span class="knowledge-card__header__title__text">{{ knowledge.knowledgeTitle }}</span>
+                <span class="knowledge-card__header__title__text">知识点{{ knowledge.knowledge_id }}</span>
             </div>
             <div class="knowledge-card__header__info">
                 <span class="knowledge-card__header__info__text">{{ knowledge.info }}</span>
@@ -112,11 +112,14 @@ export default {
     height: 50%;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 .knowledge-card__header__title__text {
-    font-size: 20px;
-    font-weight: 600;
+    position: relative;
+    display: flex;
+    font-size: larger;
+    width: 90%;
+    height: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 .knowledge-card__header__info {
     width: 100%;
