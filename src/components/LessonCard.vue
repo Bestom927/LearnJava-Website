@@ -124,7 +124,7 @@ export default {
     backdrop-filter: blur(5px);
 }
 .lesson-card__header__title{
-    background: #e0e0e0d0;
+    background: #efefefd0;
     position: absolute;
     top: 0;
     left: 0;
@@ -147,8 +147,8 @@ export default {
     align-items: center;
 }
 .lesson-card__header__title__text{
-    font: 1em sans-serif;
-    color: rgb(39, 55, 228);
+    font: 0.8em sans-serif;
+    color: rgb(114, 131, 240);
     position: absolute;
     top: 0;
     left: 0;
@@ -157,6 +157,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 .lesson-card__body{
     position: absolute;

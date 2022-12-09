@@ -1,5 +1,5 @@
 <template>
-  <div>this is anwser</div>
+  <h1>章节学习情况</h1>
   
   <el-table :data="tableData" style="width: 100%">
     <el-table-column prop="chapter_title" label="Chapter" width="400" />

@@ -129,9 +129,9 @@ export default {
 </script>
 <style scoped>
 .choiceQuestion-card {
-    width: 98%;
+    width: 97%;
     height: 100%;
-    background:linear-gradient(#21b034d0, #cc2519d5);
+    background:white;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     display: flex;
@@ -139,6 +139,19 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+
+    padding: 20px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    /* 设置card的背景色 */
+    background: linear-gradient(#ffffffd0, #ffffffd5);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
 }
 .choiceQuestion-card__header {
     width: 100%;
@@ -186,14 +199,31 @@ export default {
 }
 .choiceQuestion-card__footer {
     margin-top: 2%;
-    width: 100%;
-    height: 20%;
     justify-content: center;
     align-items: center;
 }
 .choiceQuestion-card__footer__btn {
     font-size: 20px;
     color: rgb(224, 25, 25);
+}
+.el-button--primary{
+    margin-left: 0;
+    margin-top: 5px;
+    color: #1686f5;
+    width: 98vw;
+    background-color: rgb(240, 248, 255);
+    border-color: rgb(148, 197, 238);
+    font-size: 14px;
+  &:hover {
+    color: rgb(240, 248, 255);
+    background-color: rgb(148, 197, 238);
+    border-color: rgb(148, 197, 238);
+  }
+  &:active {
+    color: rgb(240, 248, 255);
+    background-color: rgb(148, 197, 238);
+    border-color: rgb(148, 197, 238);
+  }
 }
 
 </style>
