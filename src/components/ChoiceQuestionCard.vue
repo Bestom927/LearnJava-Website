@@ -129,9 +129,9 @@ export default {
 </script>
 <style scoped>
 .choiceQuestion-card {
-    width: 100%;
+    width: 98%;
     height: 100%;
-    background-color:linear-gradient(#ffffffd0, #bdecfdd5);
+    background:linear-gradient(#21b034d0, #cc2519d5);
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     display: flex;

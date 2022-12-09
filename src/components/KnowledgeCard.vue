@@ -10,12 +10,13 @@
         </div>
         <div class="knowledge-card__body">
             <div class="knowledge-card__body__content">
-                <span class="knowledge-card__body__content__text">{{ knowledge.knowledgeContent }}</span>
+                <span class="knowledge-card__body__content__text">{{ knowledge.knowledge_content }}</span>
             </div>
         </div>
         <div class="knowledge-card__footer">
             <div class="knowledge-card__footer__btn">
-                <el-button type="primary" @click="handleClick">完成学习</el-button>
+                <el-button type="primary" @click="handleClick" v-if="this.knowledge.already_learned==0">完成学习</el-button>
+                <el-button type="primary" v-if="!this.knowledge.already_learned==0">已学习</el-button>
             </div>
         </div>
     </div>
@@ -32,7 +33,7 @@ export default {
             id:1,
             knowledgeTitle:"test",
             info:"just test",
-            knowledgeContent:"just test",
+            knowledge_content:"just test",
         },
     },
     methods: {
@@ -54,13 +55,32 @@ export default {
                 //     path: "/knowledgedetail",
                 //     query: { knowledge_id: this.knowledge.id },
                 // });
-                console.log("finish"+this.knowledge.knowledgeId);
-                ElMessage({
-                  message: "已学习知识点"+this.knowledge.knowledgeId,
-                  type: "success",
-                  showClose: true,
-                  duration: 2000,
+                console.log("finish " +this.$route.params.lesson_id);
+                console.log("finish " +this.$route.params.chapter_id);
+                console.log("finish " +this.knowledge.knowledge_id);
+                console.log("finish " +this.$store.state.user_info.user_id);
+                axios
+                .post("/api/knowledge/learn", {
+                    lesson_id: this.$route.params.lesson_id,
+                    chapter_id: this.$route.params.chapter_id,
+                    knowledge_id: this.knowledge.knowledge_id,
+                    user_id: this.$store.state.user_info.user_id,
+                    
+                })
+                .then((res) => {
+                    console.log(res);
+                    this.knowledge.already_learned=1;
+                    ElMessage({
+                        message: "已学习知识点"+this.knowledge.knowledge_id,
+                        type: "success",
+                        showClose: true,
+                        duration: 2000,
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
                 });
+                
             }
         },
     },

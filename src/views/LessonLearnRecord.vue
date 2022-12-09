@@ -2,12 +2,10 @@
   <div>this is anwser</div>
   
   <el-table :data="tableData" style="width: 100%">
-    <el-table-column prop="date" label="Date" width="240" />
-    <el-table-column prop="name" label="Name" width="240" />
-    <el-table-column prop="address" label="Address" />
-    <el-table-column prop="progress" label="Progress">
+    <el-table-column prop="chapter_title" label="Chapter" width="400" />
+    <el-table-column prop="learnt_knowledge_num/overall_knowledge_num*100" label="Progress" style="position:absolute;left: 500;">
       <template  #default="scope">
-      <Progress :width="600" :progress="scope.row.progress" :strokeWidth="10" :showInfo="true" /></template>
+      <Progress :width="600" :progress="scope.row.progress" :strokeWidth="10" :showInfo="false" /></template>
     </el-table-column>
   </el-table>
 </template>
@@ -65,15 +63,23 @@ export default {
       });
     }
     axios
-      .get("/api/lesson_answer_record", {
+      .get("/api/knowledge/learnRecord", {
         params: {
-          user_id: this.$store.state.user_id,
+          user_id: this.$store.state.user_info.user_id,
           lesson_id: this.$route.query.lesson_id,
         },
       })
       .then((res) => {
         console.log(res);
-        this.tableData = res.data;
+        this.tableData = res.data.data.learn_record;
+        //对于每个数据，计算出progress
+        for (let i = 0; i < this.tableData.length; i++) {
+          this.tableData[i].progress = (
+            (this.tableData[i].learnt_knowledge_num /
+              this.tableData[i].overall_knowledge_num) *
+            100
+          ).toFixed(2);
+        }
       })
       .catch((err) => {
         console.log(err);

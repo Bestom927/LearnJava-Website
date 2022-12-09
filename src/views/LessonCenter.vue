@@ -3,6 +3,7 @@
     <div class="downBox">
       <div v-for="(lesson, index) in lesson_list" :key="index">
         <LessonCard :lesson="lesson"></LessonCard>
+        
         <br />
       </div>
     </div>

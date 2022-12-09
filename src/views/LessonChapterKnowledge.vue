@@ -64,7 +64,7 @@ export default {
        url: "/api/knowledge/getList" ,
          params: {
             lesson_id: this.$route.params.lesson_id,
-            chapter_id: this.chapter_id,
+            chapter_id: this.$route.params.chapter_id,
             user_id: this.$store.state.user_info.user_id,
          },
        method: "get",

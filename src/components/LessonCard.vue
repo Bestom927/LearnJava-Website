@@ -114,7 +114,7 @@ export default {
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     /* 设置card的背景色 */
-    background: linear-gradient(#ffffffd0, #bdecfdd5);
+    background: linear-gradient(#ffffffd0, #ffffffd5);
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -124,6 +124,7 @@ export default {
     backdrop-filter: blur(5px);
 }
 .lesson-card__header__title{
+    background: #e0e0e0d0;
     position: absolute;
     top: 0;
     left: 0;
@@ -141,6 +142,28 @@ export default {
     left: 0;
     width: 100%;
     height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.lesson-card__header__title__text{
+    font: 1em sans-serif;
+    color: rgb(39, 55, 228);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.lesson-card__body{
+    position: absolute;
+    top: 35%;
+    left: 0;
+    width: 100%;
+    height: 55%;
     display: flex;
     justify-content: center;
     align-items: center;

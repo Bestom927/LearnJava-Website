@@ -5,9 +5,9 @@
       <!-- <el-table-column prop="date" label="Date" width="240" /> -->
       <el-table-column prop="lesson_name" label="Lesson" width="240" />
       <el-table-column prop="chapter_name" label="Chapter" />
-      <el-table-column prop="finish_rate" label="Progress">
-        <template  #default="scope">
-        <Progress :width="600" :progress="scope.row.progress" :strokeWidth="10" :showInfo="false" /></template>
+      <el-table-column prop="finish_rate" label="Progress"  >
+        <template  #default="scope" >
+        <Progress :width="600" :progress="scope.row.finish_rate" :strokeWidth="10" :showInfo="false" /></template>
       </el-table-column>
     </el-table>
   </template>
@@ -24,11 +24,11 @@
         lesson_id: this.$route.query.lesson_id,
         tableData: [
         {
-                lesson_name: "test语言程序设计",
+                lesson_name: "该课程暂时没有答题记录",
                 total_question_num: 3,
-                chapter_name: "第一章 Java语言与程序设计基础",
+                chapter_name: "该课程暂时没有答题记录",
                 "already_done_question_num": 2,
-                "finish_rate": 66,
+                "finish_rate": 100,
                 "chapter_id": 1,
                 "not_done_question_num": 1
             },
