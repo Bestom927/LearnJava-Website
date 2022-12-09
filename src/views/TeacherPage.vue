@@ -2,13 +2,43 @@
      <div class="about">
         <h1>This is a teacher page</h1>
     </div>
-    <router-link to="/teacher/reviewed">reviewed</router-link>|
-    <router-link to="/teacher/unreviewed">unreviewed</router-link>|
+    <el-row :gutter="12">
+    <el-col :span="8"><router-link to="/teacher/reviewed">
+      <el-card shadow="hover"><el-icon><CircleCheckFilled /></el-icon>reviewed </el-card>
+    </router-link>
+    </el-col>
+    <el-col :span="8" > <router-link to="/teacher/unreviewed">
+      <el-card shadow="hover"><el-icon><EditPen /></el-icon> unreviewed </el-card>
+    </router-link>
+    </el-col>
+    <el-col :span="8"> <router-link to="/teacher/add_lesson">
+      <el-card shadow="hover"><el-icon><CirclePlusFilled /></el-icon> add_lesson </el-card>
+    </router-link>
+    </el-col>
+  </el-row>
+  <br/>
+  <el-row :gutter="12">
+
+    <el-col :span="8"> <router-link to="/teacher/add_chapter">
+      <el-card shadow="hover"><el-icon><CirclePlusFilled /></el-icon> add_chapter </el-card>
+    </router-link>
+    </el-col>
+    <el-col :span="8"> <router-link to="/teacher/add_knowledge">
+      <el-card shadow="hover"><el-icon><CirclePlusFilled /></el-icon> add_knowldge </el-card>
+    </router-link>
+    </el-col>
+    <el-col :span="8">  <router-link to="/teacher/add_question">
+      <el-card shadow="hover"><el-icon><CirclePlusFilled /></el-icon> add_question </el-card>
+    </router-link>
+    </el-col>
+  </el-row>
+    
+<!--    
     
     <router-link to="/teacher/add_lesson">add_lesson</router-link>|
     <router-link to="/teacher/add_chapter">add_chapter</router-link>|
     <router-link to="/teacher/add_knowledge">add_knowldge</router-link>|
-    <router-link to="/teacher/add_question">add_question</router-link>
+    <router-link to="/teacher/add_question">add_question</router-link> -->
 
     
   </template>

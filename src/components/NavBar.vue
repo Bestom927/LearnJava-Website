@@ -12,22 +12,22 @@
         ><img src="../assets/javalogo.png" class="logo"
       /></el-menu-item>
       <div class="flex-grow" />
-      <el-menu-item index="home" @click="goHome">首页</el-menu-item>
+      <el-menu-item index="home" @click="goHome"><el-icon><House /></el-icon>首页</el-menu-item>
       <el-menu-item v-if="this.$store.state.is_student" index="lesson_center" @click="goLessonCenter"
-        >我的课程</el-menu-item
+        ><el-icon><Management /></el-icon>我的课程</el-menu-item
       >
       <el-menu-item v-if="this.$store.state.is_student" index="answer_center" @click="goAnwserCenter"
-        >我的答题</el-menu-item
+        ><el-icon><DataAnalysis /></el-icon>我的答题</el-menu-item
       >
 
       <el-menu-item v-if="this.$store.state.is_teacher" index="teacher_center" @click="goTeacherPage"
-        >批改</el-menu-item
+        ><el-icon><EditPen /></el-icon>批改</el-menu-item
       >
 
       <el-sub-menu index="6" v-if="is_login == false">
-        <template #title>登录/注册</template>
-        <el-menu-item index="login" @click="goLogin">登录</el-menu-item>
-        <el-menu-item index="register" @click="goRegister">注册</el-menu-item>
+        <template #title><el-icon><Promotion /></el-icon>登录/注册</template>
+        <el-menu-item index="login" @click="goLogin"><el-icon><User /></el-icon>登录</el-menu-item>
+        <el-menu-item index="register" @click="goRegister"><el-icon><CirclePlus /></el-icon>注册</el-menu-item>
       </el-sub-menu>
       <el-sub-menu index="7" v-else>
         <template #title>
@@ -36,9 +36,9 @@
         </template>
   
         <el-menu-item index="person_info" @click="goPersonInformation"
-          >账户设置</el-menu-item
+          ><el-icon><Setting /></el-icon>账户设置</el-menu-item
         >
-        <el-menu-item index="7-5" @click="loginOut">退出登录</el-menu-item>
+        <el-menu-item index="7-5" @click="loginOut"><el-icon><SwitchButton /></el-icon>退出登录</el-menu-item>
       </el-sub-menu>
     </el-menu>
   </template>
