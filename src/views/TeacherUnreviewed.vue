@@ -89,6 +89,12 @@ export default {
           showClose: true,
           duration: 2000,
         });
+        //重新进入该页面
+        this.$router.push({
+          path: "/teacher/unreviewed",
+          query: { lesson_id: this.lesson_id },
+        });
+
       })
       .catch((err) => {
         console.log(err);

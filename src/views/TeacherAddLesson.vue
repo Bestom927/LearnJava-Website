@@ -8,16 +8,18 @@
         <el-table-column prop="lessonTitle" label="lesson" width="120" />
         <el-table-column prop="lessonContent" label="lesson content"  />
     </el-table>
-    <el-button text @click="open">Click to open Message Box</el-button>
+
+    
+
+
 </template>
 
 <script>
 
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage } from 'element-plus'
 
 import axios from "axios";
 import Progress from "@/components/Progress.vue";
-import {h} from "vue";
 
 export default {
   name: "AnswerRecord",
@@ -26,6 +28,7 @@ export default {
     return {
         lesson_title:"",
         lesson_content:"",
+        commentContent:"a",
       lesson_list: [
         {
           lessonId:0,
@@ -82,46 +85,7 @@ export default {
             console.log(err);
         });
     },
-open() {
-  ElMessageBox.prompt('Please input your e-mail', 'Tip', {
-    confirmButtonText: 'OK',
-    cancelButtonText: 'Cancel',
-    message: h(
-          "div",
-          {
-            attrs: {
-              class: "el-textarea"
-            }
-          },
-          [
-            h("textarea", {
-              attrs: {
-                placeholder: "请输入回复内容",
-                class: "el-textarea__inner",
-                autocomplete: "off",
-                rows: 15,
-                id: "commentContent"
-              },
-              value: this.commentContent,
-              on: { input: this.onCommentInputChange }
-            })
-          ]
-        ),
-    inputErrorMessage: 'Invalid Email',
-  })
-    .then(({ value }) => {
-      ElMessage({
-        type: 'success',
-        message: `Your email is:${value}`,
-      })
-    })
-    .catch(() => {
-      ElMessage({
-        type: 'info',
-        message: 'Input canceled',
-      })
-    })
-}
+         
     }
 };
 </script>

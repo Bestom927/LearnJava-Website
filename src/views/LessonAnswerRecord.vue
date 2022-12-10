@@ -6,8 +6,8 @@
       <el-table-column prop="lesson_name" label="Lesson" width="240" />
       <el-table-column prop="chapter_name" label="Chapter"  width="240"/>
       <el-table-column prop="total_question_num" label="Total num" width="120"/>
-      <el-table-column prop="already_done_question_num" label="Finished num" width="240"/>
-      <el-table-column prop="finish_rate" label="Progress"  >
+      <el-table-column prop="already_done_question_num" label="Finished num" />
+      <el-table-column prop="finish_rate" label="Progress"  width="800">
         <template  #default="scope" >
         <Progress :width="600" :progress="scope.row.finish_rate" :strokeWidth="10" :showInfo="false" />
       </template>
