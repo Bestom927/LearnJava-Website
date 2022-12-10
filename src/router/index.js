@@ -67,6 +67,11 @@ const routes = [
     component:()=>import('../views/LessonChapterQuestion.vue')
   },
   {
+    path:'/try/question',
+    name:'tryQuestion',
+    component:()=>import('../views/TryQuestion.vue')
+  },
+  {
     path:'/teacher',
     name:'teacher',
     component:()=>import('../views/TeacherPage.vue')

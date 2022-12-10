@@ -1,38 +1,35 @@
 <template>
-  <h1>{{ msg }}</h1>
-  <div class="hello">
-    <h1>网站设计要点</h1>
-    <h3>颜色(color)</h3>
-    <ul>
-      <li>比如使用了深色的背景，文字也是深色的那么对比度就很低，文字不容易看清。不但要考虑深浅颜色的对比，也要考虑不同颜色的混合后的对比度。同样可以通过调整对比度达到突出特定元素的效果。
-</li>
-    </ul>
-    <h3>对比(compare)</h3>
-    <ul>
-      <li>好的设计不宜有过多的颜色，首先太多颜色看上去很乱，另一方面颜色是用来强调页面的特定元素的，如果颜色太多就会失去重点，对初学者来说，最简单的是使用黑色或白色作为背景，然后选择一个主要颜色，主颜色可以从设计的素材中寻找。有一定的关联度最好，如果觉得太单调，可以适当加一些渐变背景~
-</li>
-    </ul>
-    <h3>留白(white space)</h3>
-    <ul>
-      <li>与其将内容填满整个页面，不如降低文字或者内容大小，给元素留出适当的空白和间隔。
-</li>
-    </ul>
-    <h3>协调 (harmony)</h3>
-    <ul>
-      <li>主要是跟对齐有关的操作，比如同一列几个元素高度不一致，底部不对齐，可以将较短的拉长到跟最高的元素一样，允许元素内容留下空白，要比参差不齐来得好看。不但高度要保持一致，间隔度最好也要保持一致。
+  <h1>{{this.$store.state.user_info.user_name}}，{{ msg }}</h1>
 
-</li>
-    </ul>
+  <div class="lesson_center">
+    <div class="downBox">
+      <div v-for="(lesson, index) in lesson_list" :key="index">
+        <LessonCard :lesson="lesson"></LessonCard>
+        
+        <br />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import LessonCard from "./LessonChooseCard.vue";
+import { ElMessage } from "element-plus";
+import axios from "axios";
 export default {
   name: 'HelloWorld',
+  components: {
+    LessonCard,
+  },
   props: {
     msg: String
   },
-  create(){
+  data(){
+    return{
+      lesson_list: [],
+    }
+  },
+  created(){
     if (!this.$store.state.is_login) {
       ElMessage({
         message: "请先登录",
@@ -46,6 +43,18 @@ export default {
         query: { redirect: this.$route.fullPath },
       });
     }
+    axios({
+      url: "/api/lesson/getAll",
+      method: "get",
+    })
+      .then((res) => {
+        this.lesson_list = res.data.data.lessons;
+        this.all_num = res.data.data.all_num;
+        this.isLoading = false;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
 </script>
@@ -70,5 +79,24 @@ li {
 }
 a {
   color: #42b983;
+}
+.lesson_center {
+  
+  width: 100%;
+  height: 100%;
+  
+  box-shadow: -5px -5px 10px #eff0f0, 5px 5px 10px #ffffff;
+  border-radius: 17px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 1vw;
+}
+.lesson_center .downBox {
+  
+  width: 100%;
+  height: 100%;
+  
+  box-shadow: -5px -5px 10px #eff0f0, 5px 5px 10px #ffffff;
+  border-radius: 17px;
 }
 </style>

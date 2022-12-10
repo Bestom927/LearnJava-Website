@@ -19,7 +19,10 @@
       <el-menu-item v-if="this.$store.state.is_student" index="answer_center" @click="goAnwserCenter"
         ><el-icon><DataAnalysis /></el-icon>我的答题</el-menu-item
       >
-
+      <el-menu-item v-if="this.$store.state.is_student" index="answer_center" @click="goTryQuestion"
+        ><el-icon><Pointer /></el-icon>小试牛刀</el-menu-item
+      >
+      
       <el-menu-item v-if="this.$store.state.is_teacher" index="teacher_center" @click="goTeacherPage"
         ><el-icon><EditPen /></el-icon>批改</el-menu-item
       >
@@ -93,6 +96,24 @@
           router.push({ name: "allAnwserRecord" });
         }
         
+    },
+    goTryQuestion(){
+      if (!this.$store.state.is_login) {
+        ElMessage({
+          message: "请先登录",
+          type: "warning",
+          showClose: true,
+          duration: 2000,
+        });
+        /**之后此处需记录当前页面路径，以便于登陆完成后跳转 */
+        this.$router.push({
+          path: "/login",
+          query: { redirect: '/tryQuestion' },
+        });
+      }
+      else{
+        router.push({ name: "tryQuestion" });
+      }
     },
       goTeacherPage(){
         if (!this.$store.state.is_login) {

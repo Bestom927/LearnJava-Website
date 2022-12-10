@@ -1,7 +1,12 @@
 <template>
   <div class="home">
-    <img alt="Java logo" src="../assets/java.jpeg" style="width:30%">
-    <HelloWorld msg="Welcome to Java Learning"/>
+    <!-- <img alt="Java logo" src="../assets/java.jpeg" style="width:30%"> -->
+    <HelloWorld v-if="this.$store.state.is_student" msg="欢迎来到LearnJava网站，你可以选择以下课程"/>
+    <div v-if="!this.$store.state.is_student"> 
+      
+      <img alt="Java logo" src="../assets/java.jpeg" style="width:40%">
+      <h1 >欢迎您，{{this.$store.state.user_info.user_name}}老师！</h1>
+  </div>
   </div>
 </template>
 
@@ -17,12 +22,12 @@ export default {
   create(){
     if (!this.$store.state.is_login) {
       ElMessage({
-        message: "���ȵ�¼",
+        message: "请先登录",
         type: "warning",
         showClose: true,
         duration: 2000,
       });
-      /**֮��˴����¼��ǰҳ��·�����Ա��ڵ�½��ɺ���ת */
+      /**之后此处需记录当前页面路径，以便于登陆完成后跳转 */
       this.$router.push({
         path: "/login",
         query: { redirect: this.$route.fullPath },
