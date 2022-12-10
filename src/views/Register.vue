@@ -12,7 +12,7 @@
           <el-main>
             <div class="registerField">
               <div class="inputCard">
-                <div class="label">手机号</div>
+                <div class="label">昵称</div>
                 <el-row>
                   <el-col :span="10">
                     <el-input
@@ -28,32 +28,6 @@
                 </el-row>
               </div>
   
-              <div class="inputCard">
-                <div class="label">验证码</div>
-                <el-row>
-                  <el-col :span="10">
-                    <el-input
-                      v-model="iden_code"
-                      :input-style="this.input_style"
-                      v-on:input="validateCAPTCHA()"
-                    >
-                      <template #append>
-                        <el-button
-                          type="primary"
-                          @click="getIdeCode"
-                          :disabled="isDisposed"
-                        >
-                          {{
-                            this.isDisposed
-                              ? `${this.time}s后重新获取`
-                              : "获取验证码"
-                          }}
-                        </el-button>
-                      </template>
-                    </el-input>
-                  </el-col>
-                </el-row>
-              </div>
   
               <div class="inputCard">
                 <div class="label">密码</div>
@@ -94,6 +68,10 @@
               </div>
   
               <div class="buttonCard">
+                <input type="radio" v-model="picked" value="student" id="学生"/>
+              <label for="student">学生</label>
+              <input type="radio" v-model="picked" value="teacher" id="老师"/>
+              <label for="teacher">老师</label>
                 <el-button type="primary" @click="register">注册</el-button>
               </div>
             </div>
@@ -107,13 +85,11 @@
         :before-close="handleClose"
         append-to-body
       >
-        <span>您的注册手机号为 {{ this.user_phone }} </span>
-        <br />
-        <span>您的ID为 {{ this.user_id }} </span>
+        <span>您的注册昵称（用户名）为 {{ this.user_phone }} </span>
         <br />
         <span>您的密码为 {{ this.user_password }} </span>
         <br />
-        <span>请您牢记以上信息, ID及密码将作为用户登录唯一凭证</span>
+        <span>请您牢记以上信息, 昵称（用户名）及密码将作为用户登录唯一凭证</span>
         <template #footer>
           <span class="dialog-footer">
             <el-button type="primary" @click="closeDialog">确认</el-button>
@@ -134,7 +110,8 @@
     components: { ElMessage },
     data() {
       return {
-        iden_code: "",
+        
+        picked:"student",
         user_phone: "",
         user_password: "",
         user_id: "",
@@ -149,7 +126,6 @@
       register() {
         if (
           this.user_phone === "" ||
-          this.iden_code === "" ||
           this.user_password === "" ||
           this.tmp_password === ""
         ) {
@@ -158,12 +134,48 @@
         } else if (this.user_password !== this.tmp_password) {
           ElMessage.error("两次输入密码不相同！请再次确认密码");
           return;
-        } else {
+        } else if(this.picked=="student"){
           axios
-            .post("/register", {
-              user_phone: this.user_phone,
-              user_password: this.user_password,
-              code:this.iden_code,
+            .post("/api/register/student", {
+              name: this.user_phone,
+              password: this.user_password,
+            })
+            .then((res) => {
+              console.log(res);
+              console.log(res.data);
+              console.log("res.status" + res.data.status);
+              if (res.data.status == true) {
+                //若成功注册
+                ElMessage({
+                  message: "注册成功！",
+                  type: "success",
+                });
+                this.user_id = res.data.data.user_id;
+                console.log(this.user_id);
+                this.dialogVisible = true;
+              } else {
+                //若注册失败
+                ElMessage.error("该手机号已有账号或验证码输入错误，注册失败！");
+                (this.user_phone = ""),
+                  (this.user_password = ""),
+                  (this.iden_code = ""),
+                  (this.tmp_password = "");
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+              ElMessage.error("注册失败！");
+              (this.user_phone = ""),
+                (this.user_password = ""),
+                (this.iden_code = ""),
+                (this.tmp_password = "");
+            });
+        }
+        else if(this.picked=="teacher"){
+          axios
+            .post("/api/register/teacher", {
+              name: this.user_phone,
+              password: this.user_password,
             })
             .then((res) => {
               console.log(res);
