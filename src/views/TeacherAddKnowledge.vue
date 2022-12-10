@@ -2,6 +2,7 @@
     <div class="about">
         <h1>This is add question page</h1>
     </div>
+    <h3>选择课程</h3>
     <el-select v-model="this_lesson_id" class="m-2" placeholder="Select" size="large">
     <el-option
       v-for="item in lesson_list"
@@ -11,6 +12,7 @@
     />
     </el-select>
 
+    <h3>选择章节</h3>
     <el-select v-model="this_chapter_id" class="m-2" placeholder="Select" size="large">
     <el-option
       v-for="item in chapter"
@@ -22,27 +24,21 @@
 
    <br/>
     <div style="margin: 20px 0" v-if="this.addQuestionVisible">
-    <h2>������Ŀ</h2>
-    <el-input
-    v-model="this.chapter_title"
-    autosize
-    type="textarea"
-    placeholder="Please input question title"
-  />
-  <div style="margin: 20px 0" />
+    <h2>添加知识</h2>
+    
   <el-input
-    v-model="this.chapter_content"
+    v-model="this.knowledge_content"
     :autosize="{ minRows: 2, maxRows: 4 }"
     type="textarea"
-    placeholder="Please input question content"
+    placeholder="Please input knowledge content"
   />
   <div style="margin: 20px 0">
-  <el-button type="primary" @click="addChapter">����</el-button>
-  <el-button type="primary" @click="(addQuestionVisible=!addQuestionVisible)">ȡ��</el-button>
+  <el-button type="primary" @click="addChapter">添加</el-button>
+  <el-button type="primary" @click="(addQuestionVisible=!addQuestionVisible)">取消</el-button>
     </div>
   </div>
 
-    <el-button v-else style="margin: 20px 0" type="primary" @click="(addQuestionVisible=!addQuestionVisible)">������Ŀ</el-button>
+    <el-button v-else style="margin: 20px 0" type="primary" @click="(addQuestionVisible=!addQuestionVisible)">添加知识</el-button>
 
 </template>
 
@@ -60,7 +56,7 @@ export default {
     return {
         addQuestionVisible:false,
         chapter_title:"",
-        chapter_content:"",
+        knowledge_content:"",
         this_lesson_id:"",
         this_chapter_id:"",
         lesson_list: [],
@@ -70,12 +66,12 @@ export default {
     created() {
         if (!this.$store.state.is_login) {
             ElMessage({
-                message: "���ȵ�¼",
+                message: "请先登录",
                 type: "warning",
                 showClose: true,
                 duration: 2000,
             });
-            /**֮��˴����¼��ǰҳ��·�����Ա��ڵ�½��ɺ���ת */
+            /**之后此处需记录当前页面路径，以便于登陆完成后跳转 */
             this.$router.push({
                 path: "/login",
                 query: { redirect: this.$route.fullPath },
@@ -110,18 +106,17 @@ export default {
     },
     methods:{
         addChapter(){
-            console.log(this.chapter_title);
-            console.log(this.chapter_content);
+            console.log(this.knowledge_content);
         axios
-        .post("/api/question/post", {
-            lesson_id: this.lesson_id,
-            chapter_title: this.chapter_title,
-            chapter_content: this.chapter_content,
+        .post("/api/knowledge/post", {
+            lesson_id: this.this_lesson_id,
+            chapter_id: this.this_chapter_id,
+            knowledge_content: this.knowledge_content,
         })
         .then((res) => {
             console.log(res);
             this.$router.push({
-                path: "/teacher/add_chapter",
+                path: "/teacher/add_knowledge",
             });
         })
         .catch((err) => {

@@ -2,6 +2,7 @@
     <div class="about">
         <h1>This is add question page</h1>
     </div>
+    <h3>选择课程</h3>
     <el-select v-model="this_lesson_id" class="m-2" placeholder="Select" size="large">
     <el-option
       v-for="item in lesson_list"
@@ -11,6 +12,7 @@
     />
     </el-select>
 
+    <h3>选择章节</h3>
     <el-select v-model="this_chapter_id" class="m-2" placeholder="Select" size="large">
     <el-option
       v-for="item in chapter"
@@ -23,19 +25,59 @@
    <br/>
     <div style="margin: 20px 0" v-if="this.addQuestionVisible">
     <h2>添加题目</h2>
-    <el-input
+    <el-select v-model="question_type" class="m-2" placeholder="Select" size="large">
+        <el-option 
+        v-for="item in question_types"
+            :key="item.question_type"
+            :label="item.question_type_name"
+            :value="item.question_type"
+        />
+    </el-select>
+    <el-input style="margin: 20px 0"
     v-model="this.question_content"
     autosize
     type="textarea"
-    placeholder="Please input question title"
+    placeholder="Please input question content"
   />
   <div style="margin: 20px 0" />
   <el-input
-    v-model="this.question_score"
+    v-model="this.reference_answer"
     :autosize="{ minRows: 2, maxRows: 4 }"
     type="textarea"
-    placeholder="Please input question content"
+    placeholder="Please input question reference answer"
   />
+    <div style="margin: 20px 0" />
+    <span>题目分数</span>
+  <el-input-number v-model="score" :min="1" :max="100"  />
+    <div style="margin: 20px 0" v-if="question_type=='choice_question'">
+
+
+    <el-input
+        v-model="this.choice_A"
+        :autosize="{ minRows: 2, maxRows: 4 }"
+        type="textarea"
+        placeholder="Please input choice A"
+    />
+    <el-input
+        v-model="this.choice_B"
+        :autosize="{ minRows: 2, maxRows: 4 }"
+        type="textarea"
+        placeholder="Please input choice B"
+    />
+    <el-input
+        v-model="this.choice_C"
+        :autosize="{ minRows: 2, maxRows: 4 }"
+        type="textarea"
+        placeholder="Please input choice C"
+    />
+    <el-input
+        v-model="this.choice_D"
+        :autosize="{ minRows: 2, maxRows: 4 }"
+        type="textarea"
+        placeholder="Please input choice D"
+    />
+</div>
+
   <div style="margin: 20px 0">
   <el-button type="primary" @click="addChapter">添加</el-button>
   <el-button type="primary" @click="(addQuestionVisible=!addQuestionVisible)">取消</el-button>
@@ -59,12 +101,24 @@ export default {
   data() {
     return {
         addQuestionVisible:false,
-        chapter_title:"",
-        chapter_content:"",
         this_lesson_id:"",
         this_chapter_id:"",
+        score:"0",
+        question_content:"",
+        reference_answer:"",
+        choice_A:"",
+        choice_B:"",
+        choice_C:"",
+        choice_D:"",
         lesson_list: [],
         chapter: [],
+        question_type:"short_answer_question",
+        question_types:[
+            {question_type:"short_answer_question",
+            question_type_name:"简答题"},
+            {question_type:"choice_question",
+            question_type_name:"选择题"},
+        ],
     };
     },
     created() {
@@ -114,14 +168,21 @@ export default {
             console.log(this.chapter_content);
         axios
         .post("/api/question/post", {
-            lesson_id: this.lesson_id,
-            chapter_title: this.chapter_title,
-            chapter_content: this.chapter_content,
+            question_type: this.question_type,
+            lesson_id: this.this_lesson_id,
+            chapter_id: this.this_chapter_id,
+            question_content: this.question_content,
+            reference_answer: this.reference_answer,
+            score: this.score,
+            choice_A: this.choice_A,
+            choice_B: this.choice_B,
+            choice_C: this.choice_C,
+            choice_D: this.choice_D,
         })
         .then((res) => {
             console.log(res);
             this.$router.push({
-                path: "/teacher/add_chapter",
+                path: "/teacher/add_question",
             });
         })
         .catch((err) => {
