@@ -1,6 +1,6 @@
 <template>
     <div class="about">
-        <h1>This is add question page</h1>
+        <h1>This is add knowledge page</h1>
     </div>
     <h3>选择课程</h3>
     <el-select v-model="this_lesson_id" class="m-2" placeholder="Select" size="large">
