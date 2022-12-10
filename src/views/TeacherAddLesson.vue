@@ -9,8 +9,29 @@
         <el-table-column prop="lessonContent" label="lesson content"  />
     </el-table>
 
-    
+   
+    <div style="margin: 20px 0" v-if="this.addLessonVisible">
+    <h2>添加课程</h2>
+    <el-input
+    v-model="this.lesson_title"
+    autosize
+    type="textarea"
+    placeholder="Please input lesson title"
+  />
+  <div style="margin: 20px 0" />
+  <el-input
+    v-model="this.lesson_content"
+    :autosize="{ minRows: 2, maxRows: 4 }"
+    type="textarea"
+    placeholder="Please input lesson content"
+  />
+  <div style="margin: 20px 0">
+  <el-button type="primary" @click="addLesson">添加</el-button>
+  <el-button type="primary" @click="(addLessonVisible=!addLessonVisible)">取消</el-button>
+    </div>
+  </div>
 
+    <el-button v-else type="primary" @click="(addLessonVisible=!addLessonVisible)">添加课程</el-button>
 
 </template>
 
@@ -26,6 +47,7 @@ export default {
   components: {Progress},
   data() {
     return {
+        addLessonVisible:false,
         lesson_title:"",
         lesson_content:"",
         commentContent:"a",
@@ -70,16 +92,18 @@ export default {
     },
     methods:{
         addLesson(){
+            console.log(this.lesson_title);
+            console.log(this.lesson_content);
         axios
         .post("/api/lesson/post", {
-            params:{
-                lesson_title: this.lesson_title,
-                lesson_content: this.lesson_content,
-            }
+            lesson_title: this.lesson_title,
+            lesson_content: this.lesson_content,
         })
         .then((res) => {
             console.log(res);
-           
+            this.$router.push({
+                path: "/teacher/add_lesson",
+            });
         })
         .catch((err) => {
             console.log(err);
