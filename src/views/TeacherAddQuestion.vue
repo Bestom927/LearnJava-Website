@@ -103,7 +103,7 @@ export default {
         addQuestionVisible:false,
         this_lesson_id:"",
         this_chapter_id:"",
-        score:"0",
+        score:"100",
         question_content:"",
         reference_answer:"",
         choice_A:"",
@@ -184,10 +184,12 @@ export default {
             this.$router.push({
                 path: "/teacher/add_question",
             });
+            this.reload ();
         })
         .catch((err) => {
             console.log(err);
         });
+        
     },
          
     }

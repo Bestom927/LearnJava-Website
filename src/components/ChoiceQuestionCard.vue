@@ -17,10 +17,10 @@
             <label for="B">B.{{ choiceQuestion.detail.choiceB}}</label>
             <br/>
             <input type="radio" v-model="picked" value="C" id="C"/>
-            <label for="C">C.{{ choiceQuestion.detail.choiceB}}</label>
+            <label for="C">C.{{ choiceQuestion.detail.choiceC}}</label>
             <br/>
             <input type="radio" v-model="picked" value="D" id="D"/>
-            <label for="D">D.{{ choiceQuestion.detail.choiceB}}</label>
+            <label for="D">D.{{ choiceQuestion.detail.choiceD}}</label>
             <br/>
         </div>
         <div class="choiceQuestion-card__footer" v-if="choiceQuestion.haveBeenAnswered">
