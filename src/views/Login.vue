@@ -16,7 +16,7 @@
         <el-main>
           <div class="loginField">
             <div class="inputCard">
-              <div class="label">用户手机号</div>
+              <div class="label">用户昵称</div>
               <el-row>
                 <el-col :span="10">
                   <el-input
