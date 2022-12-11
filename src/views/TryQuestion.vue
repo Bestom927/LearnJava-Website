@@ -4,7 +4,7 @@
         <QuestionCard :question="shortAnswerQuestion"></QuestionCard>
         <br />
     </div>
-    <div v-for="(choiceAnswer, index) in choiceAnswerList" :key="index">
+    <div v-for="(choiceAnswer, index) in choiceQuestionList" :key="index">
         <ChoiceQuestionCard :choiceQuestion="choiceAnswer"></ChoiceQuestionCard>
         <br />
     </div></div>
@@ -33,7 +33,7 @@ export default {
           content:"just aaaaaa aaaaa aaaaa aaaaaa aaaaa aaaaaaa aaaaaaa aaaaa aaaaaaa aaaaaa  aa aaaaaaa aaa aaaa aaaaa aaaaa aaaaaaa aaaaaaaa aaaaaaa aaaaa a aa aaaaa aaaaaa aaaa aaaaaa aaa aaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaa aaaaaa aaaaaaa aaaa aaaaaa aaaaaaa aaaaaa aaaaaaa aaaaa  aa aaa a aa aaaa aaaaa aa aaaaaaaa a aa aaa aaaaaa aaaaaaaaa",
         } 
             ],
-            choiceAnswerList:[
+            choiceQuestionList:[
             {
               chapter_id:1,
           }],
@@ -84,7 +84,7 @@ export default {
         })
           .then((res) => {
             this.shortAnswerQuestionList = res.data.data.shortAnswerQuestionList;
-            this.choiceAnswerList = res.data.data.choiceAnswerList;
+            this.choiceQuestionList = res.data.data.choiceQuestionList;
           })
           .catch((err) => {
             console.log(err);
