@@ -2,7 +2,7 @@
   <div class="home">
     <!-- <img alt="Java logo" src="../assets/java.jpeg" style="width:30%"> -->
     <HelloWorld v-if="this.$store.state.is_student" msg="欢迎来到LearnJava网站，你可以选择以下课程"/>
-    <div v-if="!this.$store.state.is_student"> 
+    <div v-if="this.$store.state.is_teacher"> 
       
       <img alt="Java logo" src="../assets/java.jpeg" style="width:40%">
       <h1 >欢迎您，{{this.$store.state.user_info.user_name}}老师！</h1>
